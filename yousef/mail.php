@@ -29,7 +29,7 @@ function send_mail($recipient, $subject, $message, $name)
 
     include 'connection.php';
     $query = "SELECT email FROM customer WHERE role= 1";
-    $stmt = $conn->prepare($query);
+    $stmt = $pdo->prepare($query);
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 

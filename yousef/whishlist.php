@@ -54,7 +54,7 @@ include "connection.php";
 // INNER JOIN wishlist ON product.id = wishlist.productid 
 // WHERE wishlist.customerid = $user";
 
-//     $stmt1 = $conn->prepare($query1);
+//     $stmt1 = $pdo->prepare($query1);
 
 //     $stmt1->execute();
 
