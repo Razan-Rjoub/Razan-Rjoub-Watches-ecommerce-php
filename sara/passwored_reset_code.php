@@ -34,8 +34,7 @@ function send_password_reset($get_name, $get_email, $token)
         $get_email_template = "
             <h2>Password Reset Link</h2>
             <p>Click the following link to reset your password:</p>
-            <a href='
-            http://localhost/watches-ecommerce-php-/sara/password-change.php?token=$token&email=$get_email'>Reset Password</a>
+            <a href='http://localhost/watches-ecommerce-php-/sara/password-change.php?token=$token&email=$get_email'>Reset Password</a>
             <br><br>
         ";
 

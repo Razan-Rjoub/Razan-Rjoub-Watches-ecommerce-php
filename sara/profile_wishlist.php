@@ -1,7 +1,7 @@
 <?php
 include('connection.php');
 session_start();
-$userid_sesstion =2;
+$userid_sesstion = $_COOKIE['userid'];;
 $query_select_wishlist = "SELECT * FROM `wishlist` WHERE customerid =  $userid_sesstion";
 $stmt_select_wishlist = $pdo->prepare($query_select_wishlist);
 // $stmt_select_orders->bindParam(1, $userid_session);
@@ -101,7 +101,7 @@ $stmt_select_wishlist->execute();
                                     class="ik ik-plus"></i></a>
                             <div class="dropdown-menu dropdown-menu-right menu-grid" aria-labelledby="menuDropdown">
                                 <a class="dropdown-item" href="#" data-toggle="tooltip" data-placement="top" title=""
-                                    data-original-title="Home"><i class="ik ik-bar-chart-2"></i></a>
+                                    data-original-title="Dashboard"><i class="ik ik-bar-chart-2"></i></a>
                                 <a class="dropdown-item" href="#" data-toggle="tooltip" data-placement="top" title=""
                                     data-original-title="Message"><i class="ik ik-mail"></i></a>
                                 <a class="dropdown-item" href="#" data-toggle="tooltip" data-placement="top" title=""
@@ -166,7 +166,7 @@ $stmt_select_wishlist->execute();
                         <nav id="main-menu-navigation" class="navigation-main">
 
                             <div class="nav-item">
-                                <a href="home.php"><span>Home</span></a>
+                                <a href="home.php"><span>Dashboard</span></a>
                             </div>
                             <div class="nav-item">
                                 <a href="profile_info.php"><span>Account</span></a>
@@ -199,6 +199,9 @@ $stmt_select_wishlist->execute();
                             </div>
 
 
+                            <div class="nav-item">
+                                <a href="calendar.html"><span>Calendar</span></a>
+                            </div>
 
 
                             <div class="nav-lavel">Support</div>
@@ -568,7 +571,7 @@ $stmt_select_wishlist->execute();
                     <div class="container">
                         <div class="apps-wrap">
                             <div class="app-item">
-                                <a href="#"><i class="ik ik-bar-chart-2"></i><span>Home</span></a>
+                                <a href="#"><i class="ik ik-bar-chart-2"></i><span>Dashboard</span></a>
                             </div>
                             <div class="app-item">
                                 <a href="#"><i class="ik ik-mail"></i><span>Message</span></a>

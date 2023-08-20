@@ -42,8 +42,22 @@ session_start();
 							<i class="zmdi zmdi-search"></i>
 						</div> -->
 					<a href="../cart/shoping-cart.php">
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 " data-notify="2">
-							<!--  icon-header-noti js-show-cart  -->
+						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart"
+							data-notify="2">
+							<?php
+							// if (!isset($_COOKIE['userid'])) {
+							// 	$cart = $_SESSION['cart'];
+							// 	$cartCount = count($cart);
+							// 	echo $cartCount;
+							// } else {
+							// 	$countQuery = "SELECT COUNT(*) FROM cart";
+
+							// 	$stmt = $conn->prepare($countQuery);
+							// 	$stmt->execute();
+							// 	$cartCount = $stmt->fetchColumn();
+							// 	echo $cartCount;
+							// } ?>
+							
 							<i class="zmdi zmdi-shopping-cart"></i>
 						</div>
 					</a>
