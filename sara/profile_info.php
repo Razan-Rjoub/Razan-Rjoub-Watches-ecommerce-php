@@ -1,7 +1,7 @@
 <?php
 include('connection.php');
-session_start();
-$userid_sesstion = 2;
+
+$userid_sesstion =  $_COOKIE['userid'];
 $query_select = "SELECT * FROM customer WHERE id =  $userid_sesstion";
 $stmt_select = $pdo->prepare($query_select);
 // $stmt_select->bindParam(1, $userid_sesstion);
@@ -33,10 +33,39 @@ $row_use = $stmt_select->fetch(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="./node_modules/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="./dist/css/theme.min.css">
     <script src="./src/js/vendor/modernizr-2.8.3.min.js"></script>
+    <link rel="icon" type="image/png" href="../watchicon.png" />
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../yousef/vendor/bootstrap/css/bootstrap.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../yousef/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../yousef/fonts/iconic/css/material-design-iconic-font.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../yousef/fonts/linearicons-v1.0.0/icon-font.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../yousef/vendor/animate/animate.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../yousef/vendor/css-hamburgers/hamburgers.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../yousef/vendor/animsition/css/animsition.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../yousef/vendor/select2/select2.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../yousef/vendor/daterangepicker/daterangepicker.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../yousef/vendor/slick/slick.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../yousef/vendor/MagnificPopup/magnific-popup.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../yousef/vendor/perfect-scrollbar/perfect-scrollbar.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../yousef/css/main.css">
+	<link rel="stylesheet" type="text/css" href="../yousef/css/util.css">
+ 
 </head>
 
 <body>
-
+<?php include 'nav.php'; ?>
     <div class="wrapper">
         <header class="header-top" header-theme="light">
             <div class="container-fluid">
@@ -101,7 +130,7 @@ $row_use = $stmt_select->fetch(PDO::FETCH_ASSOC);
                                     class="ik ik-plus"></i></a>
                             <div class="dropdown-menu dropdown-menu-right menu-grid" aria-labelledby="menuDropdown">
                                 <a class="dropdown-item" href="#" data-toggle="tooltip" data-placement="top" title=""
-                                    data-original-title="Home"><i class="ik ik-bar-chart-2"></i></a>
+                                    data-original-title="Dashboard"><i class="ik ik-bar-chart-2"></i></a>
                                 <a class="dropdown-item" href="#" data-toggle="tooltip" data-placement="top" title=""
                                     data-original-title="Message"><i class="ik ik-mail"></i></a>
                                 <a class="dropdown-item" href="#" data-toggle="tooltip" data-placement="top" title=""
@@ -166,7 +195,7 @@ $row_use = $stmt_select->fetch(PDO::FETCH_ASSOC);
                         <nav id="main-menu-navigation" class="navigation-main">
 
                             <div class="nav-item">
-                                <a href="home.php"><span>Home</span></a>
+                                <a href="home.php"><span>Dashboard</span></a>
                             </div>
                             <div class="nav-item">
                                 <a href="profile_info.php"><span>Account</span></a>
@@ -199,7 +228,10 @@ $row_use = $stmt_select->fetch(PDO::FETCH_ASSOC);
                             </div>
 
 
-                         
+                            <div class="nav-item">
+                                <a href="calendar.html"><span>Calendar</span></a>
+                            </div>
+
 
                             <div class="nav-lavel">Support</div>
 
@@ -254,7 +286,13 @@ $row_use = $stmt_select->fetch(PDO::FETCH_ASSOC);
                                                                             aria-describedby="data_table_info">
                                                                             <thead>
                                                                                 <tr role="row">
-                                                                                
+                                                                                    <th class="sorting_asc" tabindex="0"
+                                                                                        aria-controls="data_table"
+                                                                                        rowspan="1" colspan="1"
+                                                                                        aria-label="Shipment Date: activate to sort column descending"
+                                                                                        style="width: 38.575px;"
+                                                                                        aria-sort="ascending">
+                                                                                        User name</th>
                                                                                     <th class="sorting_asc" tabindex="0"
                                                                                         aria-controls="data_table"
                                                                                         rowspan="1" colspan="1"
@@ -283,13 +321,6 @@ $row_use = $stmt_select->fetch(PDO::FETCH_ASSOC);
                                                                                         rowspan="1" colspan="1"
                                                                                         aria-label="Name: activate to sort column ascending"
                                                                                         style="width: 150px;">
-                                                                                        password
-                                                                                    </th>
-                                                                                    <th class="sorting" tabindex="0"
-                                                                                        aria-controls="data_table"
-                                                                                        rowspan="1" colspan="1"
-                                                                                        aria-label="Name: activate to sort column ascending"
-                                                                                        style="width: 150px;">
                                                                                         Action
                                                                                     </th>
                                                                                     <th class="nosort sorting_disabled"
@@ -302,7 +333,7 @@ $row_use = $stmt_select->fetch(PDO::FETCH_ASSOC);
                                                                             <tbody>
                                                                                 <tr>
                                                                                     <td class="sorting_1">
-                                                                                        <?php echo htmlspecialchars( $row_use['Username']); ?>
+                                                                                        <?php echo $row_use['Username']; ?>
                                                                                     </td>
 
                                                                                     <td>
@@ -313,9 +344,6 @@ $row_use = $stmt_select->fetch(PDO::FETCH_ASSOC);
                                                                                     </td>
                                                                                     <td>
                                                                                         <?php echo htmlspecialchars($row_use['email']); ?>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <?php echo htmlspecialchars($row_use['password']); ?>
                                                                                     </td>
                                                                                     <td>
                                                                                         <div class="table-actions">
@@ -551,7 +579,7 @@ $row_use = $stmt_select->fetch(PDO::FETCH_ASSOC);
                     <div class="container">
                         <div class="apps-wrap">
                             <div class="app-item">
-                                <a href="#"><i class="ik ik-bar-chart-2"></i><span>Home</span></a>
+                                <a href="#"><i class="ik ik-bar-chart-2"></i><span>Dashboard</span></a>
                             </div>
                             <div class="app-item">
                                 <a href="#"><i class="ik ik-mail"></i><span>Message</span></a>

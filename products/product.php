@@ -74,7 +74,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 	<!-- Product -->
 	<!-- Product -->
 	<?php include 'nav.php';
-		session_start();
+		
 		$_SESSION['current_url'] = $_SERVER['REQUEST_URI']; ?>
 
 	<div class="bg0 m-t-100 ">
@@ -153,16 +153,16 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 								<a class="dropdown-item" href="product.php?price1=0&price2=50">
 									<span class="form-check-label">0$-50$</span>
 								</a>
-								<a class="dropdown-item" href="product.php?color=Silver">
+								<a class="dropdown-item" href="product.php?price1=50&price2=100">
 									<span class="form-check-label">50$-100$</span>
 								</a>
-								<a class="dropdown-item" href="product.php?color=Black">
+								<a class="dropdown-item" href="product.php?price1=101&price2=150">
 									<span class="form-check-label">100$-150$</span>
 								</a>
-								<a class="dropdown-item" href="product.php?color=Gold">
+								<a class="dropdown-item" href="product.php?price1=151&price2=200">
 									<span class="form-check-label">150$-200$</span>
 								</a>
-								<a class="dropdown-item" href="product.php?color=Blue">
+								<a class="dropdown-item" href="product.php?price1=201&price2=1000">
 									<span class="form-check-label">above 200$</span>
 								</a>
 							</div>

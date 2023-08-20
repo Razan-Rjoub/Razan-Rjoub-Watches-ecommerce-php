@@ -1,7 +1,7 @@
 <?php
 include('connection.php');
 session_start();
-$userid_session = 2; // from session
+$userid_session =  $_COOKIE['userid'];; // from session
 
 $query_select_shipment = "SELECT * FROM `shipment` WHERE customerid = $userid_session";
 $stmt_select_shipment = $pdo->prepare($query_select_shipment);
@@ -101,7 +101,7 @@ $shipments = $stmt_select_shipment->fetchAll(PDO::FETCH_ASSOC);
                                     class="ik ik-plus"></i></a>
                             <div class="dropdown-menu dropdown-menu-right menu-grid" aria-labelledby="menuDropdown">
                                 <a class="dropdown-item" href="#" data-toggle="tooltip" data-placement="top" title=""
-                                    data-original-title="Home"><i class="ik ik-bar-chart-2"></i></a>
+                                    data-original-title="Dashboard"><i class="ik ik-bar-chart-2"></i></a>
                                 <a class="dropdown-item" href="#" data-toggle="tooltip" data-placement="top" title=""
                                     data-original-title="Message"><i class="ik ik-mail"></i></a>
                                 <a class="dropdown-item" href="#" data-toggle="tooltip" data-placement="top" title=""
@@ -166,7 +166,7 @@ $shipments = $stmt_select_shipment->fetchAll(PDO::FETCH_ASSOC);
                         <nav id="main-menu-navigation" class="navigation-main">
 
                             <div class="nav-item">
-                                <a href="home.php"><span>Home</span></a>
+                                <a href="home.php"><span>Dashboard</span></a>
                             </div>
                             <div class="nav-item">
                                 <a href="profile_info.php"><span>Account</span></a>
@@ -199,7 +199,10 @@ $shipments = $stmt_select_shipment->fetchAll(PDO::FETCH_ASSOC);
                             </div>
 
 
-                     
+                            <div class="nav-item">
+                                <a href="calendar.html"><span>Calendar</span></a>
+                            </div>
+
 
                             <div class="nav-lavel">Support</div>
 
@@ -544,7 +547,7 @@ $shipments = $stmt_select_shipment->fetchAll(PDO::FETCH_ASSOC);
                     <div class="container">
                         <div class="apps-wrap">
                             <div class="app-item">
-                                <a href="#"><i class="ik ik-bar-chart-2"></i><span>Home</span></a>
+                                <a href="#"><i class="ik ik-bar-chart-2"></i><span>Dashboard</span></a>
                             </div>
                             <div class="app-item">
                                 <a href="#"><i class="ik ik-mail"></i><span>Message</span></a>
