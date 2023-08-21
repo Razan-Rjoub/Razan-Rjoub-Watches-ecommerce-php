@@ -50,7 +50,7 @@ else if(isset($_GET['plusid'])){
             }
         }
         unset($item); 
-        header('Location:shoping-cart.php'); 
+        header('Location:product-detail.php'); 
     }
 
 
@@ -74,13 +74,8 @@ else{
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
 }
-if (isset($_SESSION['current_url'])) {
-    $savedUrl = $_SESSION['current_url'];
 
-} else {
-
-}
-header("Location:$savedUrl");
+header("Location:product-detail.php");
 exit();
 }
 }

@@ -25,14 +25,14 @@ if (isset($_POST['submit_login'])) {
     $row = $stmt_select->fetch(PDO::FETCH_ASSOC);
 
     echo $user;
-     $expiration = strtotime('+1 month');
-        setcookie('userid', $row['id'], time() + $expiration, '/');
+    $expiration = strtotime('+1 month');
+    setcookie('userid', $row['id'], time() + $expiration, '/');
     // print_r($row);
 
 }
 
 if ($user > 0) {
-    
+
     session_start();
     // Verify the password
     if (password_verify($password, $row['password'])) {
@@ -40,7 +40,7 @@ if ($user > 0) {
         // $_SESSION['userid'] = $row['id'];
         // $user = $_SESSION['userid'];
         // $session_id = session_id();
-       
+
         // Set session variables
         $_SESSION['username'] = $Username;
         $user = $_COOKIE["userid"];
@@ -50,31 +50,42 @@ if ($user > 0) {
             header('Location: admin.php');
             exit(); // Make sure to exit after redirecting
         } else {
-            if (isset($_SESSION['cart'])) {
+if (isset($_SESSION['cart'])) {
+    foreach ($_SESSION['cart'] as $product) {
+        $prodid = $product['productid'];
+   
+        $query = "SELECT COUNT(*) FROM cart WHERE productid = :prodid";
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(':prodid', $prodid);
+        $stmt->execute();
+        $existingProductCount = $stmt->fetchColumn();
 
-                foreach ($_SESSION['cart'] as $product) {
-                    $prodid = $product['productid'];
-                    $productName = $product['Productname'];
-                    $price = $product['price'];
-                    $image = $product['image'];
-                    $quantity = $product['quantity'];
-                    $query = "INSERT INTO cart (quantity, customerid,productid) VALUES ($quantity, $user,$prodid)";
-                    $statement = $pdo->prepare($query);
-                    $statement->execute();
-                }
-                unset($_SESSION['cart']);
-                setcookie('session_id_cart', '', time() - 3600, '/');
-            }
+        if ($existingProductCount == 0) {
+            $user = $_COOKIE['userid'];
+            $quantity = $product['quantity'];
+            $query = "INSERT INTO cart (quantity, customerid, productid) VALUES (:quantity, :user, :prodid)";
+            $statement = $pdo->prepare($query);
+            $statement->bindParam(':quantity', $quantity);
+            $statement->bindParam(':user', $user);
+            $statement->bindParam(':prodid', $prodid);
+            $statement->execute();
+        }
+    }
+    unset($_SESSION['cart']);
+    setcookie('session_id_cart', '', time() - 3600, '/');
+}
+
+
             if (isset($_SESSION['current_url'])) {
                 $savedUrl = $_SESSION['current_url'];
-               
+
             } else {
-               
+
             }
             header("Location:$savedUrl");
-            exit(); 
+            exit();
         }
-          
+
 
     } else if ($password != '') {
         echo 'Invalid password';

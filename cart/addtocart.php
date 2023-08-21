@@ -62,6 +62,7 @@ if (!isset($_COOKIE['userid'])) {
         $result = $pdo->query($query);
         $cart = $result->fetchAll(PDO::FETCH_ASSOC);
         foreach ($_SESSION['cart'] as $product) {
+
             $prodid = $product['productid'];
             $productName = $product['Productname'];
             $price = $product['price'];
@@ -95,6 +96,5 @@ if (!isset($_COOKIE['userid'])) {
         $statement->execute();
     }
 }
-header('Location:../products/product-detail.php')
-;
+header('Location:../products/product-detail.php');
 ?>
