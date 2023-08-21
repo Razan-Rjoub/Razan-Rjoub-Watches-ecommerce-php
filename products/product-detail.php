@@ -184,7 +184,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 			<div class="fav">
 				<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100"
 					data-tooltip="Add to Wishlist">
-					<i class="zmdi zmdi-favorite"></i>
+					<i class="zmdi zmdi-favorite" style="float: right;"></i>
 				</a>
 			</div>
 
@@ -280,9 +280,9 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 						<li class="nav-item p-b-10">
 							<a class="nav-link active" data-toggle="tab" href="#description" role="tab">Description</a>
 						</li>
-						<li class="nav-item p-b-10">
+						<!-- <li class="nav-item p-b-10">
 							<a class="nav-link" data-toggle="tab" href="#reviews" role="tab">Reviews</a>
-						</li>
+						</li> -->
 					</ul>
 
 					<!-- Tab panes -->
@@ -349,7 +349,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 	<?php unset($_SESSION['single-id-cart']);?>
 
 
-	<!-- ?php include 'footer.php'; ?> -->
+	<?php include './footer.php'; ?>
 
 	<!--===============================================================================================-->
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>

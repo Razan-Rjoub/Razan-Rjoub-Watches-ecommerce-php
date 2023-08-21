@@ -32,19 +32,22 @@
 <body class="animsition">
 	
 	<!-- Header -->
-	<?php include "nav.php";
-		
+	<?php 	include 'connection.php';
+include 'nav.php';		
 		$_SESSION['current_url'] = $_SERVER['REQUEST_URI']; ?>
 
 
 	<!-- Title page -->
-	<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('imags/img-men-watches/capture1.jpg');">
+	<!-- <section class="bg-img1 txt-center p-lr-15 p-tb-60" style="background-clor: wight;">
+		
+	</section>	 -->
+<section>
+<section class="bg-img1 txt-center p-lr-15 p-tb-125" style="background-image: url('imags/1_1200x1200.webp')">
 		<h2 class="ltext-105 cl0 txt-center">
 			About
 		</h2>
 	</section>	
-
-
+</section>
 	<!-- Content page -->
 	<section class="bg0 p-t-75 p-b-120">
 		<div class="container">
