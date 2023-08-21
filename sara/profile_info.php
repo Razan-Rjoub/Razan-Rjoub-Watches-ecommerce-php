@@ -65,7 +65,9 @@ $row_use = $stmt_select->fetch(PDO::FETCH_ASSOC);
 </head>
 
 <body>
+    <br>
 <?php include 'nav.php'; ?>
+<br>
     <div class="wrapper">
         <header class="header-top" header-theme="light">
             <div class="container-fluid">

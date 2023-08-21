@@ -32,7 +32,8 @@
 <body class="animsition">
 	
 	<!-- Header -->
-	<?php include 'nav.php';
+	<?php 	include 'connection.php';
+include 'nav.php';
 		
 		$_SESSION['current_url'] = $_SERVER['REQUEST_URI'];
 	// $_SESSION['current_url'] = $_SERVER['REQUEST_URI']; 
@@ -40,7 +41,7 @@
 	<!-- navbar -->
 
 	<!-- Title page -->
-	<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('images/bg-02.jpg');">
+	<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('imags\mens-watch-with-a-white-dial-without-numbers-isolated-background-2GYKHR9.jpg');">
 		<h2 class="ltext-105 cl0 txt-center">
 			Contact
 		</h2>

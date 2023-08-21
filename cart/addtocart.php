@@ -4,7 +4,7 @@ session_start();
 
 	
 if (!isset($_COOKIE['userid'])) {
-    if (!isset($_SESSION['cart'])) {
+    if (!isset($_SESSION['cart'])) {    
         $_SESSION['cart'] = array();
 
     }

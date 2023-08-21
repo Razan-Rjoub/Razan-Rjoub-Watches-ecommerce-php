@@ -6,8 +6,8 @@ try {
 	$querySelectCategory = "SELECT * FROM category WHERE 1";
 	$querySelectImage = "SELECT image FROM product WHERE 1 LIMIT 3";
 
-	$stmtCategory = $conn->prepare($querySelectCategory);
-	$stmtImages = $conn->prepare($querySelectImage);
+	$stmtCategory = $pdo->prepare($querySelectCategory);
+	$stmtImages = $pdo->prepare($querySelectImage);
 
 	$stmtCategory->execute();
 	$stmtImages->execute();
@@ -41,8 +41,8 @@ try {
 	<title>Home</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="image/png" href="../watchicon.png" />
 	<!--===============================================================================================-->
-	<link rel="icon" type="image/png" href="images/icons/favicon.png" />
 	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
 	<!--===============================================================================================-->
@@ -88,7 +88,7 @@ try {
 	<section class="section-slide">
 		<div class="wrap-slick1">
 			<div class="slick1">
-				<div class="item-slick1" style="background-image: url(imags/img-men-watches/c3.jpg);">
+				<!-- <div class="item-slick1" style="background-image: url(imags/img-men-watches/c3.jpg);">
 					<div class="container h-full">
 						<div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
 							<div class="layer-slick1 animated visible-false" data-appear="fadeInDown" data-delay="0">
@@ -111,7 +111,7 @@ try {
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 
 				<div class="item-slick1" style="background-image: url(imags/img-men-watches/c5.jpg);">
 					<div class="container h-full">
@@ -124,13 +124,13 @@ try {
 
 							<div class="layer-slick1 animated visible-false" data-appear="lightSpeedIn"
 								data-delay="800">
-								<h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1">
-									Jackets & Coats
-								</h2>
+								<span class="ltext-201 cl2 p-t-19 p-b-43 respon1">
+								 2023
+								</span>
 							</div>
-
+<br>
 							<div class="layer-slick1 animated visible-false" data-appear="slideInUp" data-delay="1600">
-								<a href="../products/product_copy.php"
+								<a href="../products/product.php?id=1"
 									class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
 									Shop Now
 								</a>
@@ -145,7 +145,8 @@ try {
 							<div class="layer-slick1 animated visible-false" data-appear="rotateInDownLeft"
 								data-delay="0">
 								<span class="ltext-101 cl2 respon2">
-									Men Collection 2018
+									Men New-Season
+
 								</span>
 							</div>
 
@@ -157,7 +158,7 @@ try {
 							</div>
 
 							<div class="layer-slick1 animated visible-false" data-appear="rotateIn" data-delay="1600">
-								<a href="../products/product_copy.php"
+								<a href="../products/product.php?id=2"
 									class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
 									Shop Now
 								</a>
@@ -216,7 +217,7 @@ try {
 
 	<?php
 	$sql = "SELECT * FROM product";
-	$stmt = $conn->query($sql);
+	$stmt = $pdo->query($sql);
 	$products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 	?>
@@ -227,7 +228,7 @@ try {
 		<h2 style="text-align: center;margin-bottom:50px">Products</h2>
 		<div class="row isotope-grid">
 			<!-- Query the database to retrieve image data from the "product" table -->
-			<?php $result = $conn->query("SELECT image,price,Productname,id FROM product ORDER BY id DESC LIMIT 8");
+			<?php $result = $pdo->query("SELECT image,price,Productname,id FROM product ORDER BY id DESC LIMIT 8");
 
 			//<!-- Fetch all start-->
 			
@@ -291,7 +292,7 @@ try {
     INNER JOIN wishlist ON product.id = wishlist.productid 
     WHERE wishlist.customerid = $user";
 
-	$stmt1 = $conn->prepare($query1);
+	$stmt1 = $pdo->prepare($query1);
 
 	$stmt1->execute();
 

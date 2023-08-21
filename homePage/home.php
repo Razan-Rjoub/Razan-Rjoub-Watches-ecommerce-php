@@ -6,8 +6,8 @@ try {
 	$querySelectCategory = "SELECT * FROM category WHERE 1";
 	$querySelectImage = "SELECT image FROM product WHERE 1 LIMIT 3";
 
-	$stmtCategory = $conn->prepare($querySelectCategory);
-	$stmtImages = $conn->prepare($querySelectImage);
+	$stmtCategory = $pdo->prepare($querySelectCategory);
+	$stmtImages = $pdo->prepare($querySelectImage);
 
 	$stmtCategory->execute();
 	$stmtImages->execute();
@@ -23,7 +23,7 @@ try {
 
 	// while($row = $stmtCategory->fetch
 
-	// $conn = null;
+	// $pdo = null;
 	// $stmtCategory = null;
 	// var_dump($resultCategory);
 	// print_r($resultCategory) ;
@@ -212,7 +212,7 @@ try {
 
 	<?php
 	$sql = "SELECT * FROM product";
-	$stmt = $conn->query($sql);
+	$stmt = $pdo->query($sql);
 	$products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 	?>
@@ -223,7 +223,7 @@ try {
 		<h2 style="text-align: center;margin-bottom:50px">Products</h2>
 		<div class="row isotope-grid">
 			<!-- Query the database to retrieve image data from the "product" table -->
-			<?php $result = $conn->query("SELECT image,price,Productname FROM product ORDER BY id DESC LIMIT 8");
+			<?php $result = $pdo->query("SELECT image,price,Productname FROM product ORDER BY id DESC LIMIT 8");
 
 			//<!-- Fetch all start-->
 			
@@ -284,7 +284,7 @@ try {
     INNER JOIN wishlist ON product.id = wishlist.productid 
     WHERE wishlist.customerid = $user";
 
-	$stmt1 = $conn->prepare($query1);
+	$stmt1 = $pdo->prepare($query1);
 
 	$stmt1->execute();
 

@@ -19,7 +19,7 @@ if (!isset($_COOKIE['userid'])) {
         }
         if (!$productExists) {
             $query = "SELECT Productname,price,image FROM product where id=$prodID";
-            $stmt = $conn->prepare($query);
+            $stmt = $pdo->prepare($query);
             $stmt->execute();
             $products = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -57,7 +57,7 @@ if (!isset($_COOKIE['userid'])) {
     if (isset($_SESSION['whishlist'])) {
         $checkinsert = true;
         $query = "SELECT * FROM whishlist";
-        $result = $conn->query($query);
+        $result = $pdo->query($query);
         $whishlist = $result->fetchAll(PDO::FETCH_ASSOC);
         foreach ($_SESSION['whishlist'] as $product) {
             $prodid = $product['productid'];
@@ -76,14 +76,14 @@ if (!isset($_COOKIE['userid'])) {
                 if ($checkinsert) {
                     $query = "INSERT INTO whishlist (quantity, customerid,productid) VALUES ($quantity, $user,$prodid)";
                 }
-                $statement = $conn->prepare($query);
+                $statement = $pdo->prepare($query);
                 $statement->execute();
             }
         }
         unset($_SESSION['whishlist']);
     } else {
         $query = "SELECT * FROM wishlist";
-        $result = $conn->query($query);
+        $result = $pdo->query($query);
         $whishlist = $result->fetchAll(PDO::FETCH_ASSOC);
         $checkinsert = true;
         $prodID = $_GET['id'];
@@ -98,7 +98,7 @@ if (!isset($_COOKIE['userid'])) {
                 $query = "INSERT INTO wishlist ( customerid,productid) VALUES ( $user,$prodID)";
             }
         }
-        $statement = $conn->prepare($query);
+        $statement = $pdo->prepare($query);
         $statement->execute();
     }
 }
