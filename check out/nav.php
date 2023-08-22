@@ -4,7 +4,7 @@ session_start();
 ?>
 <header>
 	<!-- Header desktop -->
-	<div class="container-menu-desktop">
+	<div class="container-menu-desktop" >
 		<!-- Topbar -->
 		<!-- <div class="top-bar">
 				<div class="content-topbar flex-sb-m h-full container">
@@ -33,7 +33,7 @@ session_start();
 			</div> -->
 
 		<div class="wrap-menu-desktop">
-			<nav class="limiter-menu-desktop container">
+			<nav class="limiter-menu-desktop container" style="background-color:white">
 
 				<!-- Logo desktop -->
 				<a href="#" class="logo">
@@ -91,22 +91,21 @@ session_start();
 					</a>
 
 					<ul class="main-menu">
-						<?php if (isset($_SESSION['userid'])): ?>
-							<li>
-								<a href="../sara//all_profile.php">Profile</a>
-							</li>
-							<li>
-								<a href="../sara//logout.php">Logout</a>
-							</li>
-						<?php else: ?>
-							<li>
-								<a href="../sara//login.php">Login</a>
-							</li>
-							<li>
-								<a href="../sara//registration.php">Register</a>
-							</li>
-						<?php endif; ?>
-					</ul>
+					<?php if (isset($_COOKIE['userid'])): ?>
+									<li>
+										<a href="../sara/profile_info.php">Profile</a>
+									</li>
+									<li>
+										<a href="../yousef/logout.php">Logout</a>
+									</li>
+								<?php else: ?>
+									<li>
+										<a href="../sara/login.php">Login</a>
+									</li>
+									<li>
+										<a href="../sara/registration.php">Register</a>
+									</li>
+								<?php endif; ?>
 					</ul>
 				</div>
 			</nav>
@@ -117,7 +116,7 @@ session_start();
 	<div class="wrap-header-mobile">
 		<!-- Logo moblie -->
 		<div class="logo-mobile">
-			<a href="index.html"><img src="images/icons/logo-01.png" alt="IMG-LOGO"></a>
+			<a href="../yousef/home.php"><img src="../watch2.png" alt="IMG-LOGO"></a>
 		</div>
 
 		<!-- Icon header -->

@@ -55,7 +55,7 @@ if (isset($_GET['id'])) {
         include "../nav.php";
 
         ?>
-        <div class="main-panel">
+        <div class="main">
             <div class="content-wrapper">
                 <div class="col-lg-12 grid-margin stretch-card">
                     <div class="card">
@@ -68,9 +68,10 @@ if (isset($_GET['id'])) {
                                         <tr>
                                             <th scope="col">id</th>
                                             <th scope="col">product Name</th>
-                                            <th scope="col">description</th>
+                                            <th scope="col">descriptions</th>
+                                            <th scope="col">descriptionl</th>
                                             <th scope="col">price</th>
-                                            <th scope="col">stockqty</th>
+                                            <!-- <th scope="col">stockqty</th> -->
                                             <th scope="col">color</th>
                                             <th scope="col">image</th>
                                             <th scope="col">image2</th>
@@ -82,8 +83,6 @@ if (isset($_GET['id'])) {
                                         </tr>
                                     </thead>
                                     <?php
-
-
                                     $selectQuery = "SELECT * FROM product";
                                     $query = $pdo->query($selectQuery);
 
@@ -95,7 +94,6 @@ if (isset($_GET['id'])) {
 
                                     ?>
 
-
                                     <tbody>
                                         <?php foreach ($products as $product): ?>
                                             <tr>
@@ -106,14 +104,21 @@ if (isset($_GET['id'])) {
                                                     <?php echo $product['Productname']; ?>
                                                 </td>
                                                 <td class="description">
-                                                    <?php echo $product['description']; ?>
+                                                    <?php echo $product['descriptions']; ?>
+                                                </td>
+                                                <td class="description">
+                                                    <?php echo $product['descriptionl']; ?>
                                                 </td>
                                                 <td>
                                                     <?php echo $product['price']; ?>
                                                 </td>
-                                                <td>
+
+
+                                                <!-- <td>
                                                     <?php echo $product['stockqty']; ?>
-                                                </td>
+                                                </td> -->
+
+                                                
                                                 <td>
                                                     <?php echo $product['color']; ?>
                                                 </td>

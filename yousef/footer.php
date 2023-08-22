@@ -23,7 +23,7 @@
 
 					<li class="p-b-10">
 						<a href="../products/product.php?id=3" class="stext-107 cl7 hov-cl1 trans-04">
-							Samrt
+							Kids
 						</a>
 					</li>
 

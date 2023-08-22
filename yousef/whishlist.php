@@ -11,7 +11,7 @@ include "connection.php";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
-    <link rel="icon" type="image/png" href="images/icons/favicon.png" />
+    <link rel="icon" type="image/png" href="../watchicon.png" />
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
     <!--===============================================================================================-->
@@ -54,7 +54,7 @@ include "connection.php";
 // INNER JOIN wishlist ON product.id = wishlist.productid 
 // WHERE wishlist.customerid = $user";
 
-//     $stmt1 = $pdo->prepare($query1);
+//     $stmt1 = $conn->prepare($query1);
 
 //     $stmt1->execute();
 

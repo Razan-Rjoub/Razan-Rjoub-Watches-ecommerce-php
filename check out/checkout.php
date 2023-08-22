@@ -7,21 +7,37 @@
     <title>check out</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <link rel="icon" type="image/png" href="../watchicon.png" />
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
-
-    <link rel="stylesheet" type="text/css" href="css/util.css">
-    <link rel="stylesheet" type="text/css" href="css/main.css">
-    <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-
+<!--===============================================================================================-->	
+<link rel="icon" type="image/png" href="../watchicon.png" />
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="../yousef/vendor/bootstrap/css/bootstrap.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../yousef/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../yousef/fonts/iconic/css/material-design-iconic-font.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../yousef/fonts/linearicons-v1.0.0/icon-font.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../yousef/vendor/animate/animate.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../yousef/vendor/css-hamburgers/hamburgers.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../yousef/vendor/animsition/css/animsition.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../yousef/vendor/select2/select2.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../yousef/vendor/daterangepicker/daterangepicker.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../yousef/vendor/slick/slick.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../yousef/vendor/MagnificPopup/magnific-popup.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../yousef/vendor/perfect-scrollbar/perfect-scrollbar.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../yousef/css/main.css">
+	<link rel="stylesheet" type="text/css" href="../yousef/css/util.css">
 
 </head>
 
@@ -39,7 +55,7 @@
                             <div class="form-group">
                                 <label for="c_country" class="text-black">Country <span
                                         class="text-danger">*</span></label>
-                                <select id="c_country" class="form-control" name='c_country'>
+                                <select id="c_country" class="form-control" name='c_country' >
                                     <option value="1">Select a country</option>
                                     <option value="2" Selected>Jordan</option>
                                     <option value="3">Algeria</option>
@@ -53,14 +69,19 @@
                             </div>
                             <div class="form-group row">
                                 <div class="col-md-6">
+                                    <?php 
+                                    $user=$_COOKIE['userid'];
+                                    $query = "SELECT firstname,lastname FROM customer WHERE id=$user ";
+                                    $result = $pdo->query($query);
+                                    $products = $result->fetch(PDO::FETCH_ASSOC); ?>
                                     <label for="c_fname" class="text-black">First Name <span
                                             class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="c_fname" name="c_fname">
+                                    <input type="text" class="form-control" id="c_fname" name="c_fname" value="<?php echo $products['firstname'] ?>">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="c_lname" class="text-black">Last Name <span
                                             class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="c_lname" name="c_lname">
+                                    <input type="text" class="form-control" id="c_lname" name="c_lname" value="<?php echo $products['lastname'] ?>">
                                 </div>
                             </div>
 
@@ -75,7 +96,7 @@
                                     <label for="c_address" class="text-black">Address <span
                                             class="text-danger">*</span></label>
                                     <input type="text" class="form-control" id="c_address" name="c_address"
-                                        placeholder="Street address">
+                                        placeholder="Street address" value="<?php echo isset($_SESSION['c_address']) ? $_SESSION['c_address'] : ''; ?>">
                                 </div>
                             </div>
 
@@ -87,12 +108,12 @@
                                 <div class="col-md-6">
                                     <label for="c_state_country" class="text-black">State / Country <span
                                             class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="c_state_country" name="c_state_country">
+                                    <input type="text" class="form-control" id="c_state_country" name="c_state_country" value="<?php echo isset($_SESSION['c_state_country']) ? $_SESSION['c_state_country'] : ''; ?>">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="c_postal_zip" class="text-black">Posta / Zip <span
                                             class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="c_postal_zip" name="c_postal_zip">
+                                    <input type="text" class="form-control" id="c_postal_zip" name="c_postal_zip" value="<?php echo isset($_SESSION['c_state_country']) ? $_SESSION['c_postal_zip'] : ''; ?>">
                                 </div>
                             </div>
 
@@ -102,7 +123,7 @@
                                     <label for="c_phone" class="text-black">Phone <span
                                             class="text-danger">*</span></label>
                                     <input type="text" class="form-control" id="c_phone" name="c_phone"
-                                        placeholder="Phone Number">
+                                        placeholder="Phone Number" value="<?php echo isset($_SESSION['c_phone']) ? $_SESSION['c_phone'] : ''; ?>">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -125,13 +146,6 @@
                             </div>
                         </div>
 
-
-                        <div class="form-group">
-                        </div>
-
-                        <div class="form-group">
-
-                        </div>
 
                     </div>
                 </div>
@@ -207,22 +221,23 @@
                                                         $result = $pdo->query($query);
                                                         $coupons = $result->fetchAll(PDO::FETCH_ASSOC);
 
+                                                        $foundCoupon = false;
+
                                                         foreach ($coupons as $singleCoupon) {
                                                             if ($singleCoupon['coupon_name'] == $coupon) {
                                                                 $total = $_SESSION['TOTAL'];
                                                                 $totaldiscount = (int) ($_SESSION['TOTAL'] * $singleCoupon['discount'] / 100);
-                                                                $_SESSION['TOTALDiscount'] = $totaldiscount; ?>
-
-                                                                <span style="text-decoration: line-through; color:red">
-                                                                    <?php echo $_SESSION['TOTAL'] ?>
-                                                                </span> <span style="font-size:20px;font-weight:bold">
-                                                                    <?php echo (int) ($_SESSION['TOTAL'] * $singleCoupon['discount'] / 100) . 'JD';
-                                                                    ?>
-                                                                </span>
-                                                                <?php break;
-                                                            } else {
-                                                                echo $_SESSION['TOTAL'];
+                                                                $_SESSION['TOTALDiscount'] = $totaldiscount;
+                                                                $foundCoupon = true;
+                                                                break;
                                                             }
+                                                        }
+                                                        
+                                                        if ($foundCoupon) {
+                                                            echo '<span style="text-decoration: line-through; color:gray">' . $_SESSION['TOTAL'] .'JD'.' '.  '</span>';
+                                                            echo '<span style="color:red;font-weight:bold;font-size:18px">'  . $totaldiscount . 'JD</span>';
+                                                        } else {
+                                                            echo $_SESSION['TOTAL'];
                                                         }
                                                     } else {
                                                         echo $_SESSION['TOTAL'];
@@ -253,6 +268,20 @@
 
     </div>
     <?php include 'footer.php' ?>
+    <?php 
+    if(isset($_POST['c_fname'])&&isset($_POST['c_lname'])&&isset($_POST['c_address'])&&isset($_POST['c_state_country'])&&
+    isset($_POST['c_postal_zip'])&&isset($_POST['c_phone'])&&isset($_POST['c_country'])){
+        session_start();
+        $_SESSION['c_country'] = $_POST['c_country'];
+        $_SESSION['c_fname'] = $_POST['c_fname'];
+        $_SESSION['c_lname'] = $_POST['c_lname'];
+        $_SESSION['c_country'] = $_POST['c_address'];
+        $_SESSION['c_fname'] = $_POST['c_state_country'];
+        $_SESSION['c_lname'] = $_POST['c_postal_zip'];
+        $_SESSION['c_lname'] = $_POST['c_phone'];
+    }
+    ?>
+    <script> </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!--===============================================================================================-->
     <script src="vendor/jquery/jquery-3.2.1.min.js"></script>

@@ -5,7 +5,7 @@ $userid_session = $_COOKIE['userid'];
 
 $orderid=$_GET['id'];
 // $orderid=3;
-$query_select_order_items = "SELECT productid,id FROM `order item` WHERE orderid = :orderid";
+$query_select_order_items = "SELECT productid,id FROM `orderitem` WHERE orderid = :orderid";
 $stmt_select_order_items = $pdo->prepare($query_select_order_items);
 $stmt_select_order_items->bindParam(':orderid', $orderid, PDO::PARAM_INT);
 $stmt_select_order_items->execute();
@@ -190,8 +190,8 @@ $row_order_itemid = $stmt_select_order_itemsid->fetchAll(PDO::FETCH_ASSOC);
                     <div class="nav-container">
                         <nav id="main-menu-navigation" class="navigation-main">
 
-                            <div class="nav-item">
-                                <a href="home.php"><span>Dashboard</span></a>
+                        <div class="nav-item">
+                                <a href="../yousef/home.php"><span>Home</span></a>
                             </div>
                             <div class="nav-item">
                                 <a href="profile_info.php"><span>Account</span></a>

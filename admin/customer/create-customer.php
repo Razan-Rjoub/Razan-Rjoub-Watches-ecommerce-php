@@ -51,12 +51,22 @@
 
                             <div class="form-group">
                                 <label for="password"> password</label>
-                                <input class="form-control" type="text" name="password" required>
+                                <input class="form-control" type="pasword" name="password" required>
                             </div>
+
+                            
+
+                            <!-- <div class="form-group">
+                                <label for="role"> role</label>
+                                <input class="form-control" type="text" name="role" required>
+                            </div> -->
 
                             <div class="form-group">
                                 <label for="role"> role</label>
-                                <input class="form-control" type="text" name="role" required>
+                                <select class="form-control" name="role">
+                                    <option value="1">Admin</option>
+                                    <option value="0">User</option>
+                                </select>
                             </div>
 
 

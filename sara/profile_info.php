@@ -1,6 +1,7 @@
 <?php
 include('connection.php');
 
+
 $userid_sesstion =  $_COOKIE['userid'];
 $query_select = "SELECT * FROM customer WHERE id =  $userid_sesstion";
 $stmt_select = $pdo->prepare($query_select);
@@ -11,7 +12,7 @@ $row_use = $stmt_select->fetch(PDO::FETCH_ASSOC);
 ?>
 
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="en" style="top:100px">
 
 <head>
     <meta charset="utf-8">
@@ -65,12 +66,10 @@ $row_use = $stmt_select->fetch(PDO::FETCH_ASSOC);
 </head>
 
 <body>
-    <br>
-<?php include 'nav.php'; ?>
-<br>
+
     <div class="wrapper">
         <header class="header-top" header-theme="light">
-            <div class="container-fluid">
+            <div class="container-fluid"style="top:100px">
                 <div class="d-flex justify-content-between">
                     <div class="top-menu d-flex align-items-center">
                         <button type="button" class="btn-icon mobile-nav-toggle d-lg-none"><span></span></button>
@@ -197,7 +196,7 @@ $row_use = $stmt_select->fetch(PDO::FETCH_ASSOC);
                         <nav id="main-menu-navigation" class="navigation-main">
 
                             <div class="nav-item">
-                                <a href="home.php"><span>Dashboard</span></a>
+                                <a href="../yousef/home.php"><span>Home</span></a>
                             </div>
                             <div class="nav-item">
                                 <a href="profile_info.php"><span>Account</span></a>
@@ -230,17 +229,6 @@ $row_use = $stmt_select->fetch(PDO::FETCH_ASSOC);
                             </div>
 
 
-                            <div class="nav-item">
-                                <a href="calendar.html"><span>Calendar</span></a>
-                            </div>
-
-
-                            <div class="nav-lavel">Support</div>
-
-                            <div class="nav-item">
-                                <a href="javascript:void(0)"><span>Submit
-                                        Issue</span></a>
-                            </div>
                         </nav>
                     </div>
                     <div class="ps__rail-x" style="left: 0px; bottom: 0px;">

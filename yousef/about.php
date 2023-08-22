@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="images/icons/favicon.png"/>
+<link rel="icon" type="image/png" href="../watchicon.png" />
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
@@ -42,7 +42,7 @@ include 'nav.php';
 		
 	</section>	 -->
 <section>
-<section class="bg-img1 txt-center p-lr-15 p-tb-125" style="background-image: url('imags/1_1200x1200.webp')">
+<section class="bg-img1 txt-center p-lr-15 p-tb-125" style="background-image: url(imags/img-men-watches/contact.png);">
 		<h2 class="ltext-105 cl0 txt-center">
 			About
 		</h2>

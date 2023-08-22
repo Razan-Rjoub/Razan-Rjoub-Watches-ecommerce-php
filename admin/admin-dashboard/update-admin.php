@@ -46,7 +46,7 @@ if (isset($_GET['id'])) {
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel="stylesheet" href="../nav.css">
+    <link rel="stylesheet" href="../nav.css">
 </head>
 
 <body>
@@ -68,7 +68,7 @@ if (isset($_GET['id'])) {
                         <h4 class="card-title">Admin Update</h4>
 
                         <form method="post" class="container mt-md-5">
-                            
+
                             <div class="form-group">
                                 <label for="firstname">first Name</label>
                                 <input class="form-control" type="text" name="firstname"
@@ -88,18 +88,28 @@ if (isset($_GET['id'])) {
                                     value="<?php echo ($customer['email']) ?>" required>
                             </div>
 
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="role">role </label>
                                 <input class="form-control" type="text" name="role" placeholder="1 admin 0 customer"
                                     value="<?php echo ($customer['role']) ?>" required>
+                            </div> -->
+
+                            <div class="form-group">
+                                <label for="role">role </label>
+                                <select class="form-control" name="role">
+                                    <option value="1" <?php if ($customer['role'] == 1)
+                                        echo 'selected'; ?>>Admin</option>
+                                    <option value="0" <?php if ($customer['role'] == 0)
+                                        echo 'selected'; ?>>User</option>
+                                </select>
                             </div>
 
 
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="password">password</label>
                                 <input class="form-control" type="password" name="password"
                                     value="<?php echo ($customer['password']) ?>" required>
-                            </div>
+                            </div> -->
 
                             <button class="btn btn-primary" type="submit" name="update">Update</button>
                         </form>

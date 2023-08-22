@@ -16,11 +16,16 @@ if (isset($_GET['id'])) {
 
     if (isset($_POST['update'])) {
         $Productname = $_POST['Productname'];
-        $description = $_POST['description'];
+        $descriptions = $_POST['descriptions'];
+        $descriptionl = $_POST['descriptionl'];
+
         $price = $_POST['price'];
-        $stockqty = $_POST['stockqty'];
+        // $stockqty = $_POST['stockqty'];
         $color = $_POST['color'];
         $image = '';
+        $image2 = '';
+        $image3 = '';
+        
 
 
         if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
@@ -31,17 +36,37 @@ if (isset($_GET['id'])) {
         }
 
 
-        $updateQuery = "UPDATE `product` SET `Productname`=:Productname, `description`=:description, `price`=:price, `stockqty`=:stockqty, `color`=:color, `image`=:image WHERE id = :id";
+        if (isset($_FILES['image2']) && $_FILES['image2']['error'] === UPLOAD_ERR_OK) {
+            $image2 = file_get_contents($_FILES['image2']['tmp_name']);
+            // $base64Image = base64_encode($image); html size is lower 
+        } else {
+            $image2 = $product['image2'];
+        }
+
+
+        if (isset($_FILES['image3']) && $_FILES['image3']['error'] === UPLOAD_ERR_OK) {
+            $image3 = file_get_contents($_FILES['image3']['tmp_name']);
+            // $base64Image = base64_encode($image); html size is lower 
+        } else {
+            $image3 = $product['image3'];
+        }
+
+
+        $updateQuery = "UPDATE `product` SET `Productname`=:Productname, `descriptions`=:descriptions,`descriptionl`=:descriptionl, `price`=:price, `color`=:color, `image`=:image,`image2`=:image2,`image3`=:image3 WHERE id = :id";
 
 
         try {
             $updateStatement = $pdo->prepare($updateQuery);
             $updateStatement->bindValue(':Productname', $Productname, PDO::PARAM_STR);
-            $updateStatement->bindValue(':description', $description, PDO::PARAM_STR);
+            $updateStatement->bindValue(':descriptions', $descriptions, PDO::PARAM_STR);
+            $updateStatement->bindValue(':descriptionl', $descriptionl, PDO::PARAM_STR);
             $updateStatement->bindValue(':price', $price, PDO::PARAM_STR);
-            $updateStatement->bindValue(':stockqty', $stockqty, PDO::PARAM_STR);
+            // $updateStatement->bindValue(':stockqty', $stockqty, PDO::PARAM_STR);
             $updateStatement->bindValue(':color', $color, PDO::PARAM_STR);
             $updateStatement->bindValue(':image', $image, PDO::PARAM_STR);
+            $updateStatement->bindValue(':image2', $image2, PDO::PARAM_STR);
+            $updateStatement->bindValue(':image3', $image3, PDO::PARAM_STR);
+
             $updateStatement->bindValue(':id', $id, PDO::PARAM_INT);
 
 
@@ -109,13 +134,13 @@ if (isset($_GET['id'])) {
                                     value="<?php echo isset($product['price']) ? $product['price'] : ''; ?>" required>
                             </div>
 
-
+                            <!-- 
                             <div class="form-group">
                                 <label for="stockqty">stockqty</label>
                                 <input class="form-control" type="number" name="stockqty"
                                     value="<?php echo isset($product['stockqty']) ? $product['stockqty'] : ''; ?>"
                                     required>
-                            </div>
+                            </div> -->
 
 
                             <div class="form-group">
@@ -131,6 +156,16 @@ if (isset($_GET['id'])) {
                                 <input class="form-control" type="file" name="image" accept="image/*">
                             </div>
 
+                            <div class="form-group">
+                                <label for="image2">Image 2</label>
+                                <input class="form-control" type="file" name="image2" accept="image/*">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="image3">Image 3</label>
+                                <input class="form-control" type="file" name="image3" accept="image/*">
+                            </div>
+
                             <?php if (isset($product['image'])): ?>
                                 <div class="form-group">
                                     <label>Current Image</label><br>
@@ -139,6 +174,32 @@ if (isset($_GET['id'])) {
                                         alt=" ">
                                 </div>
                             <?php endif; ?>
+
+
+
+                            <?php if (isset($product['image2'])): ?>
+                                <div class="form-group">
+                                    <label>Current Image 2</label><br>
+                                    <img width="100px"
+                                        src="data:image/jpg;charset=utf8;base64, <?php echo base64_encode($product['image2']) ?>"
+                                        alt=" ">
+                                </div>
+                            <?php endif; ?>
+
+
+
+
+                            <?php if (isset($product['image3'])): ?>
+                                <div class="form-group">
+                                    <label>Current Image 3</label><br>
+                                    <img width="100px"
+                                        src="data:image/jpg;charset=utf8;base64, <?php echo base64_encode($product['image3']) ?>"
+                                        alt=" ">
+                                </div>
+                            <?php endif; ?>
+
+
+
 
                             <button class="btn btn-primary" type="submit" name="update">Update</button>
                         </form>

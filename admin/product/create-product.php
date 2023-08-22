@@ -35,17 +35,21 @@
                                 <input class="form-control" type="text" name="Productname" required>
                             </div>
                             <div class="form-group">
-                                <label for="description">Description</label>
-                                <input class="form-control" type="text" name="description" required>
+                                <label for="description">Descriptions</label>
+                                <input class="form-control" type="text" name="descriptions" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Descriptionl</label>
+                                <input class="form-control" type="text" name="descriptionl" required>
                             </div>
                             <div class="form-group">
                                 <label for="price">Price</label>
                                 <input class="form-control" type="number" name="price" required>
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="stockqty">Stock Quantity</label>
                                 <input class="form-control" type="number" name="stockqty" required>
-                            </div>
+                            </div> -->
                             <div class="form-group">
                                 <label for="categoryid">categoryid</label>
                                 <input class="form-control" type="number" name="categoryid" required>
@@ -61,12 +65,12 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="image">image</label>
+                                <label for="image2">image 3</label>
                                 <input class="form-control" type="file" name="image2" required>
                             </div>
 
                             <div class="form-group">
-                                <label for="image">image</label>
+                                <label for="image3">image 3</label>
                                 <input class="form-control" type="file" name="image3" required>
                             </div>
 

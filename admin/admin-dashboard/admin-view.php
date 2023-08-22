@@ -1,18 +1,37 @@
 <?php
 include "connection.php";
 
-$sql = "SELECT * FROM customer";
+$roleFilter = isset($_GET['role']) ? $_GET['role'] : null;
+$selectQuery = "SELECT * FROM customer";
 
-
+if ($roleFilter === 'admin' || $roleFilter === 'user') {
+    $selectQuery .= " WHERE role = :role";
+}
 
 try {
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute();
-    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $query = $pdo->prepare($selectQuery);
 
+    if ($roleFilter === 'admin' || $roleFilter === 'user') {
+        $query->bindParam(':role', $roleFilter, PDO::PARAM_STR);
+    }
+
+    $query->execute();
+    $customers = $query->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     echo "Query failed: " . $e->getMessage();
 }
+
+
+
+
+// try {
+//     $stmt = $pdo->prepare($sql);
+//     $stmt->execute();
+//     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// } catch (PDOException $e) {
+//     echo "Query failed: " . $e->getMessage();
+// }
 
 // if (isset($_GET['id'])) {
 //     $id = $_GET['id'];
@@ -45,18 +64,18 @@ try {
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="../nav.css">
-    
+
 </head>
 
 <body>
 
 
-    <div class = "side">
+    <div class="side">
         <?php
         include "../nav.php";
 
         ?>
-        <div class="main-panel">
+        <div class="main">
             <div class="content-wrapper">
                 <div class="col-lg-12 grid-margin stretch-card">
                     <div class="card">
@@ -71,7 +90,7 @@ try {
                                             <th scope="col">first name </th>
                                             <th scope="col">last name</th>
                                             <th scope="col">email</th>
-                                            <th scope="col">password</th>
+                                            
                                             <th scope="col">role</th>
                                             <th scope="col">Operation</th>
                                         </tr>
@@ -106,11 +125,21 @@ try {
                                                 <td>
                                                     <?php echo $customer['email']; ?>
                                                 </td>
-                                                <td>
+
+
+
+                                                <!-- <td>
                                                     <?php echo $customer['password']; ?>
-                                                </td>
-                                                <td>
+                                                </td> -->
+                                                <!-- <td>
                                                     <?php echo $customer['role']; ?>
+                                                </td> -->
+
+
+
+
+                                                <td>
+                                                    <?php echo $customer['role'] == 1 ? 'Admin' : 'User'; ?>
                                                 </td>
 
                                                 <td class="d-flex flex-row ">

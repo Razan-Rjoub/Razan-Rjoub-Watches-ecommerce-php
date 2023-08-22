@@ -4,8 +4,9 @@
 	<title>Contact</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="images/icons/favicon.png"/>
+	<link rel="icon" type="image/png" href="../watchicon.png" />
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
@@ -32,8 +33,7 @@
 <body class="animsition">
 	
 	<!-- Header -->
-	<?php 	include 'connection.php';
-include 'nav.php';
+	<?php include 'nav.php';
 		
 		$_SESSION['current_url'] = $_SERVER['REQUEST_URI'];
 	// $_SESSION['current_url'] = $_SERVER['REQUEST_URI']; 
@@ -41,7 +41,7 @@ include 'nav.php';
 	<!-- navbar -->
 
 	<!-- Title page -->
-	<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('imags\mens-watch-with-a-white-dial-without-numbers-isolated-background-2GYKHR9.jpg');">
+	<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url(imags/img-men-watches/contact.png)">
 		<h2 class="ltext-105 cl0 txt-center">
 			Contact
 		</h2>
@@ -83,7 +83,7 @@ include 'nav.php';
 		{
 			if(send_mail($recipient,$subject,$message,$name))
 			{
-				$error .= "Message sent!<br>";
+				$error .= "<h5 style='color:green'>Message sent!</h5><br>";
 			}else
 			{
 				$error .= "Message NOT sent!<br>";

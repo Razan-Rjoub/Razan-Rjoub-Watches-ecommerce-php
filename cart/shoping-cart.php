@@ -82,8 +82,6 @@
                                                         name="minus">
                                                         <i class="fs-16 zmdi zmdi-minus"></i>
                                                 </a>
-
-
                                             </div>
                                             <input type="hidden" name="productKey" value="<?php echo $productKey ?>">
 
@@ -121,7 +119,7 @@
                 <button type="button"
                     class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer"
                     name="updatecart">
-                    Update Cart
+                    Shop More
                 </button>
             </div></a>
         </div>
@@ -153,6 +151,17 @@
                         echo $Subtotal . 'JD'; ?>
                     </span>
                 </div>
+                <div class="size-208">
+                    <span class="stext-110 cl2">
+                        Fees: 
+                    </span>
+                </div>
+
+                <div class="size-209">
+                    <span class="mtext-110 cl2">
+                       0JD
+                    </span>
+                </div>
             </div>
             <div class="flex-w flex-t p-t-27 p-b-33">
                 <div class="size-208">
@@ -178,15 +187,26 @@
                     </span>
                 </div>
             </div>
-            <?php if (isset( $_COOKIE['userid'])) { ?>
-                <a href="../check out/checkout.php" <button
-                    class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
-                    Proceed to Checkout
-                    </button></a>
-            <?php } else { ?>
-                <a href="../sara/login.php" ><button
-                    class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
-                    Proceed to Checkout
+            <?php if (isset($_COOKIE['userid'])) {
+                $sql = "SELECT COUNT(*) FROM cart";
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute();
+                $rowCount = $stmt->fetchColumn();
+                if ($rowCount > 0) { ?>
+                    <a href="../check out/checkout.php" <button
+                        class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer ">
+                        Proceed to Checkout
+                        </button></a>
+                <?php } else { ?>
+                    <a href="#" <button
+                        class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer  js-addcart-detail">
+                        Proceed to Checkout
+                        </button></a>
+                <?php }
+            } else { ?>
+                <a href="../sara/login.php"><button
+                        class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+                        Proceed to Checkout
                     </button></a>
             <?php } ?>
         </div>
@@ -199,7 +219,7 @@
     <!--  -->
 
  <?php include 'footer.php' ?>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!--===============================================================================================-->
     <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
     <!--===============================================================================================-->
@@ -210,6 +230,18 @@
 
     <!--===============================================================================================-->
     <script src="js/main.js"></script>
+    <script src="vendor/isotope/isotope.pkgd.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/sweetalert/sweetalert.min.js"></script>
+    <script>
+        $('.js-addcart-detail').each(function () {
+            var nameProduct = $(this).parent().parent().parent().parent().find().html();
+            $(this).on('click', function () {
+                swal("The Cart Is Empty !");
+            });
+        });
+
+    </script>
 
 </body>
 

@@ -2,26 +2,28 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
-use Fpdf\Fpdf;
+// use Fpdf\Fpdf;
 
 include('connection.php');
 session_start();
 require 'C:\xampp\htdocs\Watches-ecommerce-php-\PHPMailer-master\src\PHPMailer.php';
 require 'C:\xampp\htdocs\Watches-ecommerce-php-\PHPMailer-master\src\SMTP.php';
 require 'C:\xampp\htdocs\Watches-ecommerce-php-\PHPMailer-master\src\Exception.php';
-$userid = 2;
+// $userid = $_COOKIE['userid'];
+$userid = 24;
 
 try {
     // Fetch customer information
     $customerSql = "SELECT * FROM `customer` WHERE id = :userid LIMIT 1";
-    $customerStmt = $conn->prepare($customerSql);
+    $customerStmt = $pdo->prepare($customerSql);
     $customerStmt->bindParam(':userid', $userid, PDO::PARAM_INT);
     $customerStmt->execute();
     $customer = $customerStmt->fetch(PDO::FETCH_ASSOC);
+    print_r( $customer);
 
     // Fetch order information
     $orderSql = "SELECT id, orderdate, totalprice FROM `order` WHERE customerid = :userid LIMIT 1";
-    $orderStmt = $conn->prepare($orderSql);
+    $orderStmt = $pdo->prepare($orderSql);
     $orderStmt->bindParam(':userid', $userid, PDO::PARAM_INT);
     $orderStmt->execute();
     $order = $orderStmt->fetch(PDO::FETCH_ASSOC);
@@ -31,7 +33,7 @@ try {
 
         // Fetch shipment ID
         $shipmentSql = "SELECT shipmentid FROM `order` WHERE id = :orderid LIMIT 1";
-        $shipmentStmt = $conn->prepare($shipmentSql);
+        $shipmentStmt = $pdo->prepare($shipmentSql);
         $shipmentStmt->bindParam(':orderid', $orderid, PDO::PARAM_INT);
         $shipmentStmt->execute();
         $shipment = $shipmentStmt->fetch(PDO::FETCH_ASSOC);
@@ -41,7 +43,7 @@ try {
 
             // Fetch shipment date
             $shipmentDateSql = "SELECT Shipmentdate FROM `shipment` WHERE id = :shipmentid LIMIT 1";
-            $shipmentDateStmt = $conn->prepare($shipmentDateSql);
+            $shipmentDateStmt = $pdo->prepare($shipmentDateSql);
             $shipmentDateStmt->bindParam(':shipmentid', $shipmentid, PDO::PARAM_INT);
             $shipmentDateStmt->execute();
             $shipmentDate = $shipmentDateStmt->fetch(PDO::FETCH_ASSOC);
@@ -49,21 +51,6 @@ try {
             if ($shipmentDate) {
                 // Process the shipment date data here
                 $shipmentDateFormatted = $shipmentDate['Shipmentdate'];
-
-                // // Generate PDF with withdrawal information
-                // $doc = new Fpdf();
-                // $doc->AddPage();
-                // $doc->SetFont('Arial', 'B', 16);
-                // $doc->Cell(0, 10, "You have submitted an order", 0, 1);
-                // $doc->Ln(10);
-                // $doc->SetFont('Arial', '', 12);
-                // $doc->Cell(0, 10, "Order total price: {$order['totalprice']}", 0, 1);
-                // $doc->Cell(0, 10, "Shipment date: {$shipmentDateFormatted}", 0, 1);
-                // $doc->Cell(0, 10, "Date of Order: {$order['orderdate']}", 0, 1);
-                // $pdfPath = "Order_Details.pdf";
-                // $doc->Output($pdfPath);
-
-                // Email Sending using PHPMailer
                 $mail = new PHPMailer(true);
 
                 try {

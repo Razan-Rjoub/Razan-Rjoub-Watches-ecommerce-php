@@ -10,12 +10,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $insertQuery = "INSERT INTO customer (firstname, lastname, email, password, role) VALUES (:firstname, :lastname, :email, :password, :role)";
 
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
     try {
         $insertStatement = $pdo->prepare($insertQuery);
         $insertStatement->bindParam(':firstname', $firstname, PDO::PARAM_STR);
         $insertStatement->bindParam(':lastname', $lastname, PDO::PARAM_STR);
         $insertStatement->bindParam(':email', $email, PDO::PARAM_STR);
-        $insertStatement->bindParam(':password', $password, PDO::PARAM_STR);
+        $insertStatement->bindParam(':password', $hashedPassword, PDO::PARAM_STR);  
         $insertStatement->bindParam(':role', $role, PDO::PARAM_STR);
 
         $insertStatement->execute();

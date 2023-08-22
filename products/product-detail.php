@@ -70,14 +70,20 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <body class="animsition" style="margin-top:100px">
 
+	
+<?php 
+if(isset($_GET['id'])){
 
+}
+?>
 	<!-- Fetch start -->
 
 	<?php
 	// for product table:
 	if (isset($_GET['id'])) {
 
-
+		$_SESSION['single-id-cart']=$_GET['id'];
+		// echo $_SESSION['single-id-cart'];
 		try {
 			$productId = $_GET['id'];
 			$sql = "SELECT * FROM product WHERE id = :productId";
@@ -184,7 +190,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 			<div class="fav">
 				<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100"
 					data-tooltip="Add to Wishlist">
-					<i class="zmdi zmdi-favorite" style="float: right;"></i>
+					<i class="zmdi zmdi-favorite"></i>
 				</a>
 			</div>
 
@@ -243,23 +249,39 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 						<span class="mtext-106 cl2">
 							<?php echo "$" . "{$productDetails['price']}" ?>
 						</span>
-
+						<div class="tab-content p-t-43">
+							<!-- description -->
+							<div class="tab-pane fade show active" id="description" role="tabpanel">
+								<div class="how-pos2 p-lr-15-md" style="    padding-left: 00px;">
+									<p class="stext-102 cl6">
+										<?php echo "{$productDetails['descriptions']}" ?>;
+									</p>
+								</div>
+							</div>
+							<br>
+							<div class="tab-pane fade show active" id="description" role="tabpanel">
+								<div class="how-pos2 p-lr-15-md" style="    padding-left: 00px;">
+									<p class="stext-102 cl6">
+										Color: <?php echo "{$productDetails['color']}" ?>
+									</p>
+								</div>
+							</div>
+							<br>
+							<div class="tab-pane fade show active" id="description" role="tabpanel">
+								<div class="how-pos2 p-lr-15-md" style="    padding-left: 00px;">
+									<p class="stext-102 cl6">
+										Size: one-size 
+									</p>
+								</div>
+							</div>
+							<br>
 						<div class="flex-w flex-r-m p-b-10">
 							<div class="size-204 flex-w flex-m respon6-next">
-								<div class="wrap-num-product flex-w m-r-20 m-tb-10">
-									<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-										<i class="fs-16 zmdi zmdi-minus"></i>
-									</div>
-									<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product"
-										value="1">
-
-									<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-										<i class="fs-16 zmdi zmdi-plus"></i>
-									</div>
-								</div>
+							
 								<a
-									href="../cart/addtocart.php?id=<?php if(isset($_SESSION['single-id-cart']))
+									href="../cart/addtocart.php?id=<?php if(isset($_SESSION['single-id-cart'])){
 										echo $_SESSION['single-id-cart'];
+										}
 									else
 										echo $_GET['id'] ?>"><button
 											class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
@@ -280,9 +302,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 						<li class="nav-item p-b-10">
 							<a class="nav-link active" data-toggle="tab" href="#description" role="tab">Description</a>
 						</li>
-						<!-- <li class="nav-item p-b-10">
-							<a class="nav-link" data-toggle="tab" href="#reviews" role="tab">Reviews</a>
-						</li> -->
+
 					</ul>
 
 					<!-- Tab panes -->
@@ -291,7 +311,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 						<div class="tab-pane fade show active" id="description" role="tabpanel">
 							<div class="how-pos2 p-lr-15-md">
 								<p class="stext-102 cl6">
-								<?php echo "{$productDetails['description']}" ?>;
+								<?php echo "{$productDetails['descriptionl']}" ?>;
 							</p>
 						</div>
 					</div>
@@ -344,12 +364,11 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		</div>
 	</section>
 
-	
-
-	<?php unset($_SESSION['single-id-cart']);?>
 
 
-	<?php include './footer.php'; ?>
+
+
+	<!-- ?php include 'footer.php'; ?> -->
 
 	<!--===============================================================================================-->
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>

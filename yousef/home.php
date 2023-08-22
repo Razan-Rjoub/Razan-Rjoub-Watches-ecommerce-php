@@ -77,7 +77,7 @@ try {
 <body class="animsition">
 
 	<?php include 'nav.php';
-	
+
 
 	// Save the current URL in a session variable
 	$_SESSION['current_url'] = $_SERVER['REQUEST_URI']; ?><!-- navbar -->
@@ -125,10 +125,10 @@ try {
 							<div class="layer-slick1 animated visible-false" data-appear="lightSpeedIn"
 								data-delay="800">
 								<span class="ltext-201 cl2 p-t-19 p-b-43 respon1">
-								 2023
+									2023
 								</span>
 							</div>
-<br>
+							<br>
 							<div class="layer-slick1 animated visible-false" data-appear="slideInUp" data-delay="1600">
 								<a href="../products/product.php?id=1"
 									class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
@@ -180,13 +180,14 @@ try {
 					<div style="margin:auto" class="col-md-6 col-lg-4 p-b-30">
 						<!-- Block1 -->
 						<div class="block1 position-relative">
-							<div class="wrap-pic-w"> 
-								<a href="../products/product.php?id=<?php echo $category['id']?>" class="block1-img-link">
+							<div class="wrap-pic-w">
+								<a href="../products/product.php?id=<?php echo $category['id'] ?>" class="block1-img-link">
 									<img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($category['image']); ?>"
 										alt="Category Image" class="category-image">
 								</a>
 								<div class="overlay"></div>
-								<a href="../products/product.php?id=<?php echo $category['id']?>" class="block1-txt d-flex flex-column justify-content-between p-4">
+								<a href="../products/product.php?id=<?php echo $category['id'] ?>"
+									class="block1-txt d-flex flex-column justify-content-between p-4">
 									<div class="block1-txt-child1">
 										<span class="block1-name ltext-102">
 											<?= $category['Categoryname'] . "<br>" ?>
@@ -223,10 +224,10 @@ try {
 	?>
 
 	<!-- products-->
-	<div class="container">
+	<div class="container" id="new">
 
-		<h2 style="text-align: center;margin-bottom:50px">Products</h2>
-		<div class="row isotope-grid">
+		<h2 style="text-align: center;margin-bottom:50px">New Arrival</h2>
+		<div class="row isotope-grid m-b-50">
 			<!-- Query the database to retrieve image data from the "product" table -->
 			<?php $result = $pdo->query("SELECT image,price,Productname,id FROM product ORDER BY id DESC LIMIT 8");
 
@@ -236,40 +237,50 @@ try {
 			$product = $result->fetchAll(PDO::FETCH_ASSOC); ?>
 			<?php foreach ($product as $products) { ?>
 
-				<div style="margin:auto" class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women h-0.5 w-0.5">
+				<div style="margin:10px 5px;box-shadow:0px 1px 2px ;  width: 24%;"
+					class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women h-0.5">
 					<!-- Block2 -->
 					<div class="block2">
+
 						<?php
 						if ($result->rowCount() > 0) {
 							?>
+
 							<div class="block2-pic hov-img0">
-								<a href="../products/product-detail.php?id=<?php echo $products['id']?>" >
-								<img
-									src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($products['image']); ?>" />
+								<a href="../products/product-detail.php?id=<?php echo $products['id'];
+								?>"><img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($products['image']); ?>"/></a>
+
+								<a href="../cart/addtocart.php?id=<?php echo $products['id'] ?>"
+									class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 mr-2"
+									style="font: size 30px;px">
+									<i class="zmdi zmdi-shopping-cart-plus" style="font-size:20px;color:#717fe0;"></i>
 								</a>
-							<?php }?> 
-						
+							<?php } ?>
 						</div>
 						<div class="block2-txt flex-w flex-t p-t-14">
+
 							<div class="block2-txt-child1 flex-col-l">
-								<a href="../products/product-detail.php?id=<?php echo $products['id']?>" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+								<a href="../products/product-detail.php?id=<?php echo $products['id'] ?>"
+									class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6 "
+									style="overflow:hidden; width:200px;height: 15px;">
 									<?php echo $products['Productname']; ?>
 								</a>
 
 								<span class="stext-105 cl3">
 									$
 									<?php echo $products['price']; ?>
+
 								</span>
 							</div>
-
-							<div class="block2-txt-child2 flex-r p-t-3 mr-4">
-								<a href="razan.php/?id=<?php echo $products['id']?>" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2" style="display:hidden">
+							<div class="block2-txt-child2 flex-r p-t-3">
+								<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
 									<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png"
 										alt="ICON">
 									<img class="icon-heart2 dis-block trans-04 ab-t-l" src="images/icons/icon-heart-02.png"
 										alt="ICON">
 								</a>
 							</div>
+
 						</div>
 					</div>
 				</div>
@@ -282,39 +293,39 @@ try {
 
 	<?php
 
- if (isset($_COOKIE['userid'])){
-	 $user = $_COOKIE['userid'];
-	 unset($_SESSION['whishlist']);
+	if (isset($_COOKIE['userid'])) {
+		$user = $_COOKIE['userid'];
+		unset($_SESSION['whishlist']);
 
 
-	$query1 = "SELECT product.image, product.Productname
+		$query1 = "SELECT product.image, product.Productname
     FROM product
     INNER JOIN wishlist ON product.id = wishlist.productid 
     WHERE wishlist.customerid = $user";
 
-	$stmt1 = $pdo->prepare($query1);
+		$stmt1 = $pdo->prepare($query1);
 
-	$stmt1->execute();
+		$stmt1->execute();
 
-	$wishlistItems1 = $stmt1->fetchAll(PDO::FETCH_ASSOC);
-	?>
+		$wishlistItems1 = $stmt1->fetchAll(PDO::FETCH_ASSOC);
+		?>
 
-	<section class="bg0 p-t-23 p-b-140" id="favourites">
-		<div class="container">
-			<h2 style="text-align:center;margin-bottom:50px">Favourites</h2>
-			<div class="wishlist-slider">
-				<?php foreach ($wishlistItems1 as $item): ?>
-					<div class="wishlist-item">
-						<img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($item['image']); ?> " />
-						<h2>
-							<?php echo $item['Productname']; ?>
-						</h2>
-					</div>
-				<?php endforeach; ?>
+		<section class="bg0 p-t-23 p-b-140" id="favourites">
+			<div class="container">
+				<h2 style="text-align:center;margin-bottom:50px">Favourites</h2>
+				<div class="wishlist-slider">
+					<?php foreach ($wishlistItems1 as $item): ?>
+						<div class="wishlist-item">
+							<img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($item['image']); ?> " />
+							<h2>
+								<?php echo $item['Productname']; ?>
+							</h2>
+						</div>
+					<?php endforeach; ?>
+				</div>
 			</div>
-		</div>
-	</section>
-	<?php 			}?>
+		</section>
+	<?php } ?>
 
 
 
@@ -373,44 +384,16 @@ try {
 			});
 		});
 	</script>
+
+	<script>
+		$
+
+		window.location.hash = '#new'
+	</script>|
 	<!--===============================================================================================-->
 	<script src="vendor/isotope/isotope.pkgd.min.js"></script>
 	<!--===============================================================================================-->
-	<!-- <script src="vendor/sweetalert/sweetalert.min.js"></script>
-	<script>
-		$('.js-addwish-b2').on('click', function (e) {
-			e.preventDefault();
-		});
 
-		$('.js-addwish-b2').each(function () {
-			var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
-			$(this).on('click', function () {
-				swal(nameProduct, "is added to wishlist !", "success");
-
-				$(this).addClass('js-addedwish-b2');
-				$(this).off('click');
-			});
-		});
-
-		$('.js-addwish-detail').each(function () {
-			var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
-
-			$(this).on('click', function () {
-				swal(nameProduct, "is added to wishlist !", "success");
-
-				$(this).addClass('js-addedwish-detail');
-				$(this).off('click');
-			});
-		}); -->
-
-		<!-- /*---------------------------------------------*/ -->
-
-		<!-- $('.js-addcart-detail').each(function () {
-			var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
-			$(this).on('click', function () {
-				swal(nameProduct, "is added to cart !", "success");
-			});
-		}); -->
 
 	</script>
 	<!--===============================================================================================-->

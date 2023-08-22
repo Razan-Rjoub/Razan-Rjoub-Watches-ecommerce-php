@@ -165,8 +165,8 @@ $stmt_select_wishlist->execute();
                     <div class="nav-container">
                         <nav id="main-menu-navigation" class="navigation-main">
 
-                            <div class="nav-item">
-                                <a href="home.php"><span>Dashboard</span></a>
+                        <div class="nav-item">
+                                <a href="../yousef/home.php"><span>Home</span></a>
                             </div>
                             <div class="nav-item">
                                 <a href="profile_info.php"><span>Account</span></a>
@@ -199,17 +199,10 @@ $stmt_select_wishlist->execute();
                             </div>
 
 
-                            <div class="nav-item">
-                                <a href="calendar.html"><span>Calendar</span></a>
-                            </div>
+                          
 
 
-                            <div class="nav-lavel">Support</div>
-
-                            <div class="nav-item">
-                                <a href="javascript:void(0)"><span>Submit
-                                        Issue</span></a>
-                            </div>
+                     
                         </nav>
                     </div>
                     <div class="ps__rail-x" style="left: 0px; bottom: 0px;">

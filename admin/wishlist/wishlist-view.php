@@ -43,7 +43,7 @@ try {
         include "../nav.php";
 
         ?>
-        <div class="main-panel">
+        <div class="main">
             <div class="content-wrapper">
                 <div class="col-lg-12 grid-margin stretch-card">
                     <div class="card">

@@ -4,17 +4,20 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $Username = $_POST['Username'];
     $firstname = $_POST['firstname'];
     $lastname = $_POST['lastname'];
+    $password = $_POST['password'];
     $email = $_POST['email'];
-    $id= $_POST['user_id'];
+    $userid=$_COOKIE['userid'];
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);//  <!--added -->
 
     // Update user information in the database
-    $query_update = "UPDATE `customer` SET Username = :Username, firstname = :firstname, lastname = :lastname, email = :email WHERE id = :userid";
+    $query_update = "UPDATE `customer` SET Username = :Username, firstname = :firstname, lastname = :lastname, email = :email, password= :password  WHERE id = :userid";
     $stmt_update = $pdo->prepare($query_update);
     $stmt_update->bindParam(':Username', $Username);
     $stmt_update->bindParam(':firstname', $firstname);
     $stmt_update->bindParam(':lastname', $lastname);
     $stmt_update->bindParam(':email', $email);
-    $stmt_update->bindParam(':userid', $id, PDO::PARAM_INT);
+    $stmt_update->bindParam(':password', $hashedPassword);//  <!--added -->
+    $stmt_update->bindParam(':userid', $userid, PDO::PARAM_INT);
 
     if ($stmt_update->execute()) 
         // Update successful, redirect to profile page
@@ -28,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <?php
 include('connection.php');
 session_start();
-$userid_sesstion = 2;
+$userid_sesstion =$_COOKIE['userid'];
 $query_select = "SELECT * FROM customer WHERE id =  $userid_sesstion";
 $stmt_select = $pdo->prepare($query_select);
 // $stmt_select->bindParam(1, $userid_sesstion);
@@ -319,7 +322,7 @@ $row_use = $stmt_select->fetch(PDO::FETCH_ASSOC);
                                                                                             rowspan="1" colspan="1"
                                                                                             aria-label="Name: activate to sort column ascending"
                                                                                             style="width: 150px;">
-                                                                                            Action
+                                                                                            password
                                                                                         </th>
                                                                                         <th class="nosort sorting_disabled"
                                                                                             rowspan="1" colspan="1"
@@ -345,6 +348,9 @@ $row_use = $stmt_select->fetch(PDO::FETCH_ASSOC);
                                                                                         </td>
                                                                                         <td class="sorting_1">
                                                                                             <input type="email" name="email" value="<?php echo htmlspecialchars($row_use['email']); ?>">
+                                                                                        </td>
+                                                                                        <td class="sorting_1">
+                                                                                            <input type="password" name="password" value="<?php echo htmlspecialchars($row_use['password']); ?>">
                                                                                         </td>
                                                                                         <td class="sorting_1">
                                                                                         <div class="table-actions">

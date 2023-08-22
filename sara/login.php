@@ -1,99 +1,115 @@
 <?php
-// session_start();
+include('connection.php');
+
+$query = "SELECT image FROM `product`"; // Fix the query syntax
+$stmt = $pdo->prepare($query);
+$stmt->execute();
+$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+if (count($rows) > 0) { // Corrected numRows to count($rows)
+    $randomIndex = array_rand($rows); // Get a random index from the array
+
+    // Fetch the selected random image data
+    $imageData = $rows[$randomIndex]['image'];
+    $imageBase64 = base64_encode($imageData);
+   
+}
 ?>
 
 
 <!doctype html>
-<html lang="en">
-
-<head>
-
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <title>Login Form</title>
-  <!-- Add Bootstrap CSS link -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <!-- Add Font Awesome CSS for icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-
-
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-</head>
-
-<body>
-
-  <div class="container mt-5">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <div class="card">
-          <div class="card-header">
-            <h4>Login</h4>
-          </div>
-          <div class="card-body">
-            <form method="post" action="login_process.php">
-              <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" class="form-control" id="username" name="Username" placeholder="Enter username"
-                  value="<?php echo isset($_SESSION['username']) ? $_SESSION['username'] : ''; ?>" required>
-              </div>
-              <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" name="password" placeholder="Password" <?php echo isset($_SESSION['remembered_password']) ? 'value="' . $_SESSION['remembered_password'] . '"' : ''; ?>
-                  required>
-              </div>
-              <div class="form-group form-check">
-                <input type="checkbox" class="form-check-input" id="rememberMe" name="rememberMe">
-                <label class="form-check-label" for="rememberMe">Remember me</label>
-              </div>
-              <div class="form-group form-check">
-                <a href="password_reset.php" ><p>forget password</p></a>
-                
-              </div>
-              <button type="submit" name="submit_login" class="btn btn-primary btn-block">Login</button>
-            </form>
-
-            <hr>
-            <div class="text-center">
-              <p>Or login with:</p>
-              <a href="#" class="btn btn-danger"><i class="fab fa-google"></i> Login with Gmail</a>
-              <a href="#" class="btn btn-primary"><i class="fab fa-facebook-f"></i> Login with Facebook</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Optional JavaScript -->
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"></script>
-
-
-    <script>
-    document.querySelector('input[name="rememberMe"]').addEventListener("change", function () {
-        var usernameField = document.querySelector('input[name="Username"]');
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Login </title>
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         
-        if (this.checked) {
-            usernameField.value = "<?php echo isset($_SESSION['username']) ? $_SESSION['username'] : ''; ?>";
-        } else {
-            // Clear the field if the checkbox is unchecked
-            usernameField.value = '';
-        }
-    });
-</script>
+        <link rel="icon" href="./favicon.ico" type="image/x-icon" />
 
+        <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800" rel="stylesheet">
+        
+        <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="./node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+        <link rel="stylesheet" href="./node_modules/ionicons/dist/css/ionicons.min.css">
+        <link rel="stylesheet" href="./node_modules/icon-kit/dist/css/iconkit.min.css">
+        <link rel="stylesheet" href="./node_modules/perfect-scrollbar/css/perfect-scrollbar.css">
+        <link rel="stylesheet" href="./dist/css/theme.min.css">
+        <script src="./src/js/vendor/modernizr-2.8.3.min.js"></script>
+    </head>
 
-</body>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
 
+        <div class="auth-wrapper">
+            <div class="container-fluid h-100">
+                <div class="row flex-row h-100 bg-white">
+                    <div class="col-xl-8 col-lg-6 col-md-5 p-0 d-md-block d-lg-block d-sm-none d-none">
+                    <div class="lavalite-bg" style="background-image: url('<?php echo (count($rows) > 0) ? "data:image/jpg;base64, $imageBase64" : "watch2.png"; ?>')">
+                            <div class="lavalite-overlay"></div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-md-7 my-auto p-0">
+                        <div class="authentication-form mx-auto">
+                            <div class="logo-centered">
+                            <img src="watch2.png"width=200px>
+                            </div>
+                            <h3>Sign In to Watch</h3>
+                            <p>Happy to see you again!</p>
+                            <form action="login_process.php" method="post">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="Username" placeholder="Enter Username"
+                                    value="<?php echo isset($_SESSION['username']) ? $_SESSION['username'] : ''; ?>" Required>
+                                    <i class="ik ik-user"></i>
+                                </div>
+                                <div class="form-group">
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Password" <?php echo isset($_SESSION['remembered_password']) ? 'value="' . $_SESSION['remembered_password'] . '"' : ''; ?>
+                                     required>
+                                    <i class="ik ik-lock"></i>
+                                </div>
+                                <div class="row">
+                                    <div class="col text-left">
+                                        <label class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="item_checkbox" name="item_checkbox" value="option1">
+                                            <span class="custom-control-label">&nbsp;Remember Me</span>
+                                        </label>
+                                    </div>
+                                    <div class="col text-right">
+                                        <a href="forgot-password.php">Forgot Password ?</a>
+                                    </div>
+                                </div>
+                                <div class="sign-btn text-center">
+                                    <button class="btn btn-theme" name="submit_login">Sign In</button>
+                                </div>
+                            </form>
+                            <div class="register">
+                                <p>Don't have an account? <a href="registration.php">Create an account</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script>window.jQuery || document.write('<script src="./src/js/vendor/jquery-3.3.1.min.js"><\/script>')</script>
+        <script src="./node_modules/popper.js/dist/umd/popper.min.js"></script>
+        <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="./node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js"></script>
+        <script src="./node_modules/screenfull/dist/screenfull.js"></script>
+        <script src="./dist/js/theme.js"></script>
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+            e.src='https://www.google-analytics.com/analytics.js';
+            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+            ga('create','UA-XXXXX-X','auto');ga('send','pageview');
+        </script>
+    </body>
 </html>

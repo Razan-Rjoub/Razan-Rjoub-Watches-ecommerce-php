@@ -98,18 +98,28 @@ if (isset($_GET['id'])) {
                                     value="<?php echo ($customer['email']) ?>" required>
                             </div>
 
+                            <!-- <div class="form-group">
+                                <label for="role">role </label>
+                                <input class="form-control" type="text" name="role" placeholder="1 admin 0 user"
+                                    value="<?php echo ($customer['role']) ?>" required>
+                            </div> -->
+
                             <div class="form-group">
                                 <label for="role">role </label>
-                                <input class="form-control" type="text" name="role" placeholder="1 admin 0 customer"
-                                    value="<?php echo ($customer['role']) ?>" required>
+                                <select class="form-control" name="role">
+                                    <option value="1" <?php if ($customer['role'] == 1)
+                                        echo 'selected'; ?>>Admin</option>
+                                    <option value="0" <?php if ($customer['role'] == 0)
+                                        echo 'selected'; ?>>User</option>
+                                </select>
                             </div>
 
 
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="password">password</label>
                                 <input class="form-control" type="password" name="password"
                                     value="<?php echo ($customer['password']) ?>" required>
-                            </div>
+                            </div> -->
 
                             <button class="btn btn-primary" type="submit" name="update">Update</button>
                         </form>

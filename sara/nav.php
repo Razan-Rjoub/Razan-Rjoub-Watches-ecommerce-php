@@ -4,21 +4,24 @@ session_start();
 ?>
 <header>
 	<!-- Header desktop -->
+	<div style="position:relative; margin-bottun:20px;top:0px">
+
+
 	<div class="container-menu-desktop">
 
 		<div class="wrap-menu-desktop">
 			<nav class="limiter-menu-desktop container">
 
-				<!-- Logo desktop
-				<a href="#" class="logo">
-					<img src="../watch2.png" alt="IMG-LOGO">
+				
+				<!-- <a href="#" class="logo">
+					<img src="=/watch2.png" alt="IMG-LOGO">
 				</a> -->
 
 				<!-- Menu desktop -->
 				<div class="menu-desktop m-l-100">
 					<ul class="main-menu">
 						<li class="active-menu">
-							<a href="../yousef/home.php">Home</a>
+							<a href="home.php">Home</a>
 						</li>
 
 						<li>
@@ -42,47 +45,12 @@ session_start();
 							<i class="zmdi zmdi-search"></i>
 						</div> -->
 					<a href="../cart/shoping-cart.php">
-					<?php
-
-// Check if the user is logged in
-// if (isset($_SESSION['loginstatus']) && $_SESSION['loginstatus'] == 1) {
-	// User is logged in, check if userid cookie is set
-	if (isset($_COOKIE['userid'])) {
-		$user_id = $_COOKIE['userid'];
-
-		// Fetch cart count from the database
-		$query = "SELECT COUNT(*) AS cart_count FROM cart WHERE customerid = ?";
-		$stmt = $pdo->prepare($query);
-		$stmt->bindParam(1, $user_id);
-		$stmt->execute();
-		$result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-		$cart_count = $result['cart_count'];
-	} else {
-		// User is logged in but userid cookie is not set, handle accordingly
-		$cart_count = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;
-	}
-// } else {
-// 	// User is not logged in, get cart count from session
-// 	$cart_count = isset($_SESSION['session_id_cart']) ? count($_SESSION['session_id_cart']) : 0;
-// }
-
-// Display the cart count
-?>
-
-<!-- Icon header -->
-<div class="wrap-icon-header flex-w flex-r-m">
-	<!-- <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search" data-notify="2">
-			<i class="zmdi zmdi-search"></i>
-		</div> -->
-	<a href="../cart/shoping-cart.php">
-		<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti"
-			data-notify="<?php echo $cart_count ?>">
-			<i class="zmdi zmdi-shopping-cart"></i>
-
-		</div>
+						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 " data-notify="2">
+							<!--  icon-header-noti js-show-cart  -->
+							<i class="zmdi zmdi-shopping-cart"></i>
+						</div>
 					</a>
-					<a href="../yousef/whishlist.php" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 "
+					<a href="whishlist.php" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 "
 						data-notify="0"><!--  icon-header-noti   -->
 						<i class="zmdi zmdi-favorite-outline"></i>
 					</a>
@@ -93,7 +61,7 @@ session_start();
 								<a href="../sara/profile_info.php">Profile</a>
 							</li>
 							<li>
-								<a href="../yousef/logout.php">Logout</a>
+								<a href="logout.php">Logout</a>
 							</li>
 						<?php else: ?>
 							<li>
@@ -114,7 +82,7 @@ session_start();
 	<div class="wrap-header-mobile">
 		<!-- Logo moblie -->
 		<div class="logo-mobile">
-			<a href="index.html"><img src="images/icons/logo-01.png" alt="IMG-LOGO"></a>
+			<a href="index.html"><img src="watches\watch2.png" alt="IMG-LOGO"></a>
 		</div>
 
 		<!-- Icon header -->
@@ -170,6 +138,8 @@ session_start();
 		</ul>
 	</div>
 
+
+	</div>
 
 </header>
 <?php

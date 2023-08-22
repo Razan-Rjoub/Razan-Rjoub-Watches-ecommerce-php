@@ -4,7 +4,7 @@
     <title>ShopMax &mdash; Colorlib e-Commerce Template</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <link rel="icon" type="image/png" href="../watchicon.png" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,400,700"> 
     <link rel="stylesheet" href="fonts/icomoon/style.css">
 
@@ -58,9 +58,9 @@
         <div class="row">
           <div class="col-md-12 text-center">
             <span class="icon-check_circle display-3 text-success"></span>
-            <h2 class="display-3 text-black">Thank you!</h2>
+            <h2 class="display-3 text-black" >Thank you!</h2>
             <p class="lead mb-5">You order was successfuly completed.</p>
-            <p><a href="../yousef/home.php" class="btn btn-sm height-auto px-4 py-3 btn-primary">Back to shop</a></p>
+            <p><a href="../yousef/home.php" class="btn btn-sm height-auto px-4 py-3 btn-primary" style="background-color:black; border:1px solid black">Back to shop</a></p>
           </div>
         </div>
       </div>

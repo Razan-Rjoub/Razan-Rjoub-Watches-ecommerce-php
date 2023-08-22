@@ -19,9 +19,7 @@
                 <a href="../yousef">Home Page</a>
             </li>
             <li>
-
                 <a href="../admin-dashboard/admin-view.php">Admin</a>
-
             </li>
             <li>
                 <a href="../customer/customer-view.php">customer </a>
@@ -50,7 +48,7 @@
             </li>
 
             <li>
-                <a href="../review/review.php">review</a>
+                <!-- <a href="../review/review.php">review</a> -->
             </li>
             <li>
                 <a href="../messages/messages-view.php">messages</a>

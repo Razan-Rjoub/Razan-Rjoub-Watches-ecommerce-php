@@ -1,58 +1,4 @@
 <?php
-// include('connection.php');
-
-// // Ensure proper error reporting for debugging
-// error_reporting(E_ALL);
-// ini_set('display_errors', 1);
-
-// // Check if the user submitted the login form
-// if (isset($_POST['submit_login'])) {
-//     $Username = $_POST['Username'];
-//     $password = $_POST['password'];
-
-//     // Check if the user exists
-//     $query_select = "SELECT * FROM customer WHERE Username = ?";
-//     $stmt_select = $pdo->prepare($query_select);
-//     $stmt_select->bindParam(1, $Username);
-//     $stmt_select->execute();
-//     $row = $stmt_select->fetch(PDO::FETCH_ASSOC);
-
-//     if ($row) { // User exists
-//         if (password_verify($password, $row['password'])) { // Password verification
-//             session_start();
-//             $_SESSION['username'] = $Username;
-//             $user_id = $row['id'];
-//             $_SESSION['loginstatus'] = 1;
-
-//             // Set session variable indicating checkout redirection
-//             $_SESSION['redirect_to_checkout'] = true;
-
-//             // Set cookie with expiration
-//             $expiration = strtotime('+1 month');
-//             setcookie('userid', $user_id, $expiration, '/');
-
-//             if ($row['role'] == 1) { // Admin
-//                 header('Location: admin.php');
-//                 exit();
-//             } else {
-//                 // Redirect to checkout page
-//                 header('Location: ../cart/shoping-cart.php'); // Update with your checkout page URL
-//                 exit();
-//             }
-//         } else {
-//             echo 'Invalid password';
-//             include('login.php');
-//         }
-//     } else {
-//         echo 'User not found';
-//         include('login.php');
-//     }
-// }
-
-// $pdo = null; // Close database connection
-?>
-
-<?php
 include('connection.php');
 
 // "<?php echo htmlspecialchars($_SERVER['REQUEST_URI']); "// for puton .
@@ -68,7 +14,6 @@ if (isset($_POST['submit_login'])) {
     $password = $_POST['password'];
 
 
-
     // header('Location:../yousef/home.php');
     // To check if the user exists
     $query_select = "SELECT * FROM customer WHERE Username = ?";
@@ -78,20 +23,59 @@ if (isset($_POST['submit_login'])) {
     $user = $stmt_select->rowCount();
     $row = $stmt_select->fetch(PDO::FETCH_ASSOC);
 
-    echo $user;
     $expiration = strtotime('+1 month');
     setcookie('userid', $row['id'], time() + $expiration, '/');
     // print_r($row);
+    if (isset($_COOKIE['userid'])) {
+        $User = $_COOKIE['userid'];
+    }
+    session_start();
+    if (isset($_SESSION['cart'])) {
+        foreach ($_SESSION['cart'] as $product) {
+            $prodid = $product['productid'];
+            $quantity = $product['quantity'];
+    
+            // Check if the cart entry already exists for the user and product
+            $checkQuery = "SELECT id FROM cart WHERE customerid = :user AND productid = :prodid";
+            $checkStatement = $pdo->prepare($checkQuery);
+            $checkStatement->bindParam(':user', $row['id']);
+            $checkStatement->bindParam(':prodid', $prodid);
+            $checkStatement->execute();
+            $existingEntry = $checkStatement->fetch(PDO::FETCH_ASSOC);
+    
+            if ($existingEntry) {
+                $updateQuery = "UPDATE cart SET quantity = quantity + :quantity WHERE id = :Id";
+                $updateStatement = $pdo->prepare($updateQuery);
+                $updateStatement->bindParam(':quantity', $quantity);
+                $updateStatement->bindParam(':Id', $existingEntry['id']);
+                $updateStatement->execute();
+            } else {
+                $insertQuery = "INSERT INTO cart (quantity, customerid, productid) VALUES (:quantity, :user, :prodid)";
+                $insertStatement = $pdo->prepare($insertQuery);
+                $insertStatement->bindParam(':quantity', $quantity);
+                $insertStatement->bindParam(':user', $row['id']);
+                $insertStatement->bindParam(':prodid', $prodid);
+                $insertStatement->execute();
+            }
+        }
+    
+        unset($_SESSION['cart']);
+        setcookie('session_id_cart', '', time() - 3600, '/');
+    }
+    
+    if (isset($_SESSION['current_url'])) {
+        $savedUrl = $_SESSION['current_url'];
+        header("Location:$savedUrl");
+        exit();
+    } else {
+        header("Location:../yousef/home.php");
+    }
 
 }
 
 if ($user > 0) {
 
-<<<<<<< HEAD
-    session_start();
-=======
-    // session_start();
->>>>>>> b607c214ab68eb4df7f14bfb022a0856247263eb
+
     // Verify the password
     if (password_verify($password, $row['password'])) {
         // Assuming $row['password'] is the hashed password
@@ -101,55 +85,18 @@ if ($user > 0) {
 
         // Set session variables
         $_SESSION['username'] = $Username;
-        $user = $_COOKIE["userid"];
+        if (isset($_COOKIE['userid'])) {
+            $user = $_COOKIE['userid'];
+        } else {
+            // Handle the case where the cookie is not set
+        }
+
+
         $_SESSION['loginstatus'] = 1;
         if ($row['role'] == 1) { // Role 1 (Admin)
             // Redirect to admin page
-            header('Location: admin.php');
+            header('Location: ../admin/admin-dashboard/admin-view.php');
             exit(); // Make sure to exit after redirecting
-        } else {
-if (isset($_SESSION['cart'])) {
-    foreach ($_SESSION['cart'] as $product) {
-        $prodid = $product['productid'];
-   
-        $query = "SELECT COUNT(*) FROM cart WHERE productid = :prodid";
-        $stmt = $pdo->prepare($query);
-        $stmt->bindParam(':prodid', $prodid);
-        $stmt->execute();
-        $existingProductCount = $stmt->fetchColumn();
-
-        if ($existingProductCount == 0) {
-            $user = $_COOKIE['userid'];
-            $quantity = $product['quantity'];
-            $query = "INSERT INTO cart (quantity, customerid, productid) VALUES (:quantity, :user, :prodid)";
-            $statement = $pdo->prepare($query);
-            $statement->bindParam(':quantity', $quantity);
-            $statement->bindParam(':user', $user);
-            $statement->bindParam(':prodid', $prodid);
-            $statement->execute();
-        }
-    }
-    unset($_SESSION['cart']);
-    setcookie('session_id_cart', '', time() - 3600, '/');
-}
-
-
-            if (isset($_SESSION['current_url'])) {
-                $savedUrl = $_SESSION['current_url'];
-<<<<<<< HEAD
-
-            } else {
-
-            }
-            header("Location:$savedUrl");
-=======
-            header("Location:$savedUrl");
-
-            } else {
-                header("Location:../yousef/home.php");
-            }
->>>>>>> b607c214ab68eb4df7f14bfb022a0856247263eb
-            exit();
         }
 
 

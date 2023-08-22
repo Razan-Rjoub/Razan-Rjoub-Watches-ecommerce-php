@@ -3,8 +3,8 @@ $dbusername = "root";
 $dbpassword = "";
 
 try {
-	$pdo = new PDO($dsn, $dbusername, $dbpassword);
-	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	$conn = new PDO($dsn, $dbusername, $dbpassword);
+	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	// echo "Connection Successfully";
 } catch (PDOException $e) {
 	echo "Error: " . $e->getMessage();

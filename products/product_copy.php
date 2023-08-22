@@ -70,8 +70,8 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 	<!-- Product -->
 	<?php include 'nav.php';
-	
-	$_SESSION['current_url'] = $_SERVER['REQUEST_URI'];  ?>
+
+	$_SESSION['current_url'] = $_SERVER['REQUEST_URI']; ?>
 
 
 	<div class="bg0 m-t-100 ">
@@ -179,7 +179,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 	<!-- Fetch all start-->
 
-	<div class="row isotope-grid" style="margin-right: 5%; margin-left: 5%; margin-top: 100px;">
+	<div class="row isotope-grid" style="margin-right: 5%; margin-left: 5%; margin-top: 100px; ">
 
 		<?php
 		$sql = "SELECT * FROM product";
@@ -187,7 +187,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		$products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		foreach ($products as $product):
 			?>
-			<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+			<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women ">
 				<div class="block2">
 
 					<?php
@@ -195,15 +195,20 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 						?>
 
 						<div class="block2-pic hov-img0">
-							<img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($product['image']); ?>" />
-						<?php }
-					?>
+							<a href="product-detail.php?id=<?php echo $product['id'];
+							?>"><img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($product['image']); ?>" /></a>
 
+							<a href="../cart/addtocart.php?id=<?php echo $product['id'] ?>"
+								class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 mr-2"
+								style="font: size 30px;px">
+								<i class="zmdi zmdi-shopping-cart-plus" style="font-size:20px;color:#717fe0;"></i>
+							</a>
+						<?php } ?>
 					</div>
 					<div class="block2-txt flex-w flex-t p-t-14">
 						<div class="block2-txt-child1 flex-col-l ">
-							<a href="product-detail.php?id=<?php echo $product['id']; ?>"
-								class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+							<a href="product-detail.php?id=<?php echo $product['id'];
+							?>" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 
 								<?php echo $product['Productname']; ?> </a>
 
