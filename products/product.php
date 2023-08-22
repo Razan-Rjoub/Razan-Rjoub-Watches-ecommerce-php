@@ -174,7 +174,6 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 						$cardsPerPage = 8;
 						$currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
 						$offset = ($currentPage - 1) * $cardsPerPage;
-				
 						// Construct the SQL query for fetching filtered products by color
 						$sql = "SELECT * FROM product WHERE categoryid = :id LIMIT :offset, :limit";
 						$stmt = $pdo->prepare($sql);
@@ -207,7 +206,6 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 						$cardsPerPage = 8;
 						$currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
 						$offset = ($currentPage - 1) * $cardsPerPage;
-				
 						// Construct the SQL query for fetching filtered products by color
 						$sql = "SELECT * FROM product WHERE color = :color  LIMIT :offset, :limit";
 						$stmt = $pdo->prepare($sql);
@@ -302,65 +300,64 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 				$result = $pdo->query("SELECT image FROM product ORDER BY id DESC");
 				$product = $result->fetchAll(PDO::FETCH_ASSOC);
 
-
-
-
-				foreach ($categoryDetails as $products) { ?>
-	<div style="margin:10px 5px;box-shadow:0px 1px 8px;  width: 24%;"
-						class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women h-0.5">
-						<!-- Block2 -->
-						<div class="block2">
-							<?php
-							if ($result->rowCount() > 0) {
-								?>
+?>
+				<div class="row ">
+				<?php foreach ($categoryDetails as $products) { ?>
+					<?php if ($result->rowCount() > 0) { ?>
+						<div style="margin: 10px 5px; box-shadow: 0px 1px 8px; width: 24%;"
+							class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women h-0.5" style="left:10%">
+							<!-- Block2 -->
+							<div class="block2 ">
 								<div class="block2-pic hov-img0">
-									<a href="product-detail.php?id=<?php echo $products['id'];
-									?>"><img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($products['image']); ?>" /></a>
-
+									<a href="product-detail.php?id=<?php echo $products['id']; ?>"><img
+											src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($products['image']); ?>" /></a>
+			
 									<a href="../cart/addtocart.php?id=<?php echo $products['id'] ?>"
 										class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 mr-2"
 										style="font: size 30px;px">
-										<i class="zmdi zmdi-shopping-cart-plus" style="font-size:20px;color:#717fe0;"></i>
+										<i class="zmdi zmdi-shopping-cart-plus"
+											style="font-size:20px;color:#717fe0;"></i>
 									</a>
-								<?php } ?>
-							</div>
-							<div class="block2-txt flex-w flex-t p-t-14">
-								<div class=" col-12">
-									<div class="block2-txt-child1 flex-col-l">
-										<a href="../products/product-detail.php?id=<?php echo $products['id'] ?>"
-											class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6 "
-											style="overflow:hidden; width:200px;height: 15px;">
-											<?php echo $products['Productname']; ?>
-										</a>
-
-										<span class="stext-105 cl3">
-											$
-											<?php echo $products['price']; ?>
-
-										</span>
-									</div>
 								</div>
-								
-									<div class=" row block2-txt-child2 flex-r p-t-3 justify-content-between  ">
-										<div class="row justify-content-between">
-											
-												<a href="razan.php/?id=<?php echo $products['id'] ?>"
-													class="btn-addwish-b2 dis-block pos-relative js-addwish-b2 "
-													style="display:hidden ">
-													<img class="icon-heart1 dis-block trans-04"
-														src="images/icons/icon-heart-01.png" width="25px" alt="ICON">
-													<img class="icon-heart2 dis-block trans-04 ab-t-l "
-														src="images/icons/icon-heart-02.png" width="25px" alt="ICON">
-												</a>
-										
-						
+								<div class="block2-txt flex-w flex-t p-t-14">
+									<div class=" col-12">
+										<div class="block2-txt-child1 flex-col-l">
+											<a href="../products/product-detail.php?id=<?php echo $products['id'] ?>"
+												class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6 "
+												style="overflow:hidden; width:200px;height: 15px;">
+												<?php echo $products['Productname']; ?>
+											</a>
+			
+											<span class="stext-105 cl3">
+												$
+												<?php echo $products['price']; ?>
+											</span>
 										</div>
 									</div>
-								
+			
+									<div class="row block2-txt-child2 flex-r p-t-3 justify-content-between  ">
+										<div class="row justify-content-between">
+			
+											<a href="razan.php/?id=<?php echo $products['id'] ?>"
+												class="btn-addwish-b2 dis-block pos-relative js-addwish-b2 "
+												style="display:hidden ">
+												<img class="icon-heart1 dis-block trans-04"
+													src="images/icons/icon-heart-01.png" width="25px" alt="ICON">
+												<img class="icon-heart2 dis-block trans-04 ab-t-l "
+													src="images/icons/icon-heart-02.png" width="25px" alt="ICON">
+											</a>
+			
+			
+										</div>
+									</div>
+			
+								</div>
 							</div>
 						</div>
-					</div>
-					<?php }?>
+					<?php } ?>
+				<?php } ?>
+			</div>
+			
 		</div>
 	</div>
 	</div>
